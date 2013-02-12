@@ -110,6 +110,7 @@
     <ClInclude Include="OpenCLDevice.h" />
     <ClInclude Include="OpenCLException.h" />
     <ClInclude Include="OpenCLFloatToInt.h" />
+    <ClInclude Include="OpenCLGaussian.h" />
     <ClInclude Include="OpenCLHelpers.h" />
     <ClInclude Include="OpenCLIntToFloat.h" />
     <ClInclude Include="OpenCLInvertImage.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="OpenCLDevice.cpp" />
     <ClCompile Include="OpenCLException.cpp" />
     <ClCompile Include="OpenCLFloatToInt.cpp" />
+    <ClCompile Include="OpenCLGaussian.cpp" />
     <ClCompile Include="OpenCLHelpers.cpp" />
     <ClCompile Include="OpenCLIntToFloat.cpp" />
     <ClCompile Include="OpenCLInvertImage.cpp" />
