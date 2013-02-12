@@ -1,0 +1,11 @@
+﻿  OpenCLIntToFloat.cpp
+  OpenCLFloatToInt.cpp
+  OpenCLBayerFilter.cpp
+  OpenCLAlgorithmsStream.cpp
+  OpenCLAlgorithm.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  OpenCLInvertImage.cpp
+  OpenCLHelpers.cpp
+  OpenCLDevice.cpp
+  OpenCLInterface.vcxproj -> C:\Users\Tomko\Documents\GitHub\BFIOCL\BayerFilter\DLL\OpenCLInterface.dll
