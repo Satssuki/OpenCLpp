@@ -22,7 +22,7 @@ void OpenCLGaussian::setParams(const OpenCLAlgorithmParams & params)
 void OpenCLGaussian::prepare()
 {
   command_queue = device.getCommandQueue();
-  program = device.createAndBuildProgramFromFile("C:/Users/Tomko/Documents/GitHub/BFIOCL/BayerFilter/OpenCLInterface/gaussian.cl");
+  program = device.createAndBuildProgramFromFile("gaussian.cl"); //TODO: change path
   cl_int err;
   kernel = clCreateKernel(program, "gaussian", &err);
   ASSERT_OPENCL_ERR(err, "Cant create kernel");
