@@ -30,10 +30,16 @@ public:
 
   void setParams(const OpenCLAlgorithmParams & params);
   void setParams(const OpenCLGaussinaParams & params);
+
+  //not stream
+  //void prepare();
+  void run(const unsigned char * data_input, size_t di_size, unsigned char * data_output, size_t do_size);
+  void releaseMem();
+  void setKernelArgs(size_t di_size, size_t do_size);
   
   //for stream
-  void prepareForStream(cl_command_queue cc, cl_context c);
-  void runStream(const size_t * global_work_size);
+  /*void prepareForStream(cl_command_queue cc, cl_context c);
+  void runStream(const size_t * global_work_size);*/
   void copyDataToGPUStream();
   void setKernelArgsForStream();
 

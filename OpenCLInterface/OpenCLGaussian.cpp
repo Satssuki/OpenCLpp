@@ -84,7 +84,14 @@ void OpenCLGaussian::setKernelArgs(size_t di_size, size_t do_size)
 
 OpenCLGaussianImage::OpenCLGaussianImage()
 {
+  input_format.image_channel_data_type = CL_FLOAT;
+  input_format.image_channel_order = CL_LUMINANCE;
 
+  output_format.image_channel_data_type = CL_FLOAT;
+  output_format.image_channel_order = CL_LUMINANCE;
+
+  kernel_name = "gaussian";
+  source_file = "gaussian.cl";
 }
 
 OpenCLGaussianImage::~OpenCLGaussianImage()
@@ -109,7 +116,7 @@ void OpenCLGaussianImage::setParams(const OpenCLGaussinaParams& params)
 
 }
 
-void OpenCLGaussianImage::prepareForStream(cl_command_queue cc, cl_context c)
+/*void OpenCLGaussianImage::prepareForStream(cl_command_queue cc, cl_context c)
 {
 
 }
@@ -118,7 +125,7 @@ void OpenCLGaussianImage::runStream(const size_t* global_work_size)
 {
 
 }
-
+*/
 void OpenCLGaussianImage::copyDataToGPUStream()
 {
 
@@ -129,3 +136,17 @@ void OpenCLGaussianImage::setKernelArgsForStream()
 
 }
 
+void OpenCLGaussianImage::run(const unsigned char * data_input, size_t di_size, unsigned char * data_output, size_t do_size)
+{
+
+}
+
+void OpenCLGaussianImage::releaseMem()
+{
+
+}
+
+void OpenCLGaussianImage::setKernelArgs(size_t di_size, size_t do_size)
+{
+
+}
