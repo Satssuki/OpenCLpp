@@ -90,13 +90,17 @@ OpenCLGaussianImage::OpenCLGaussianImage()
   output_format.image_channel_data_type = CL_FLOAT;
   output_format.image_channel_order = CL_LUMINANCE;
 
+  gaussian_format.image_channel_data_type = CL_FLOAT;
+  gaussian_format.image_channel_order = CL_LUMINANCE;  
+
   kernel_name = "gaussian";
   source_file = "gaussian.cl";
+  size = 2;
 }
 
 OpenCLGaussianImage::~OpenCLGaussianImage()
 {
-
+  //TODO: clear mems
 }
 
 void OpenCLGaussianImage::setParams(const OpenCLAlgorithmParams& params)
@@ -128,12 +132,29 @@ void OpenCLGaussianImage::runStream(const size_t* global_work_size)
 */
 void OpenCLGaussianImage::copyDataToGPUStream()
 {
+  cl_int err = 0;
 
+  //clEnqueueWriteImage(
+  ASSERT_OPENCL_ERR(err, "Error while creating buffer input");
 }
 
 void OpenCLGaussianImage::setKernelArgsForStream()
 {
+  cl_int err;
 
+  gaussian_memory = clCreateImage2D(context, CL_MEM_READ_ONLY, &gaussian_format, size, size, 0, NULL, &err);
+  ASSERT_OPENCL_ERR(err, "Error while creating gaussian image");
+
+  gaussian = new unsigned char[4];
+
+  err = clSetKernelArg(kernel, 2, sizeof(cl_mem), (void*)&gaussian_memory);
+  ASSERT_OPENCL_ERR(err, "Error while setting as arg: gaussian image");
+
+  size_memory = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(size_to_pass), (void*)&size_to_pass, &err);
+  ASSERT_OPENCL_ERR(err, "Error while creating gaussian size");
+
+  err = clSetKernelArg(kernel, 3, sizeof(cl_mem), (void*)&size_memory);
+  ASSERT_OPENCL_ERR(err, "Error while setting as arg: gaussian size");
 }
 
 void OpenCLGaussianImage::run(const unsigned char * data_input, size_t di_size, unsigned char * data_output, size_t do_size)

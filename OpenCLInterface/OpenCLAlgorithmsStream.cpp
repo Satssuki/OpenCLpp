@@ -16,6 +16,7 @@ OpenCLAlgorithmsStream::OpenCLAlgorithmsStream(void)
 OpenCLAlgorithmsStream::~OpenCLAlgorithmsStream(void)
 {
   clearAlgorithms();
+  //TODO: clear mems
 }
 
 void OpenCLAlgorithmsStream::pushAlgorithm(OpenCLImageAlgorithm * al)

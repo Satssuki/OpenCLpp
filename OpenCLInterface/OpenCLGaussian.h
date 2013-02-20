@@ -44,9 +44,15 @@ public:
   void setKernelArgsForStream();
 
 private:
-  //memory for gaussian
-  cl_mem gaussian;
-
   //params
   OpenCLGaussinaParams params;
+  
+  //gaussian kernel
+  unsigned char * gaussian;
+  unsigned int size;
+  unsigned int size_to_pass;
+
+  cl_image_format gaussian_format;
+  cl_mem gaussian_memory;
+  cl_mem size_memory;
 };
