@@ -1,6 +1,6 @@
 #include "OpenCLGaussian.h"
 
-#include <exception>
+#include <iostream>
 
 #define ASSERT_OPENCL_ERR(ERR,MSG) if(ERR != CL_SUCCESS) \
 { \
@@ -132,27 +132,46 @@ void OpenCLGaussianImage::runStream(const size_t* global_work_size)
 */
 void OpenCLGaussianImage::copyDataToGPUStream()
 {
-  cl_int err = 0;
+  cl_int err;
+  size_t origin[] = {0,0,0};
+  size_t region[] = {size, size, 1};
 
-  //clEnqueueWriteImage(
-  ASSERT_OPENCL_ERR(err, "Error while creating buffer input");
+  gaussian[0] = 0.111111111;
+  gaussian[1] = 0.111111111;
+  gaussian[2] = 0.111111111;
+  gaussian[3] = 0.111111111;
+  gaussian[4] = 0.111111111;
+  gaussian[5] = 0.111111111;
+  gaussian[6] = 0.111111111;
+  gaussian[7] = 0.111111111;
+  gaussian[8] = 0.111111111;
+
+  err = clEnqueueWriteBuffer(command_queue, size_memory, CL_FALSE, 0, sizeof(size_to_pass), size_to_pass, 0, NULL, NULL);
+  ASSERT_OPENCL_ERR(err, "Error while enqueing wirte buffer for size");
+
+  err = clEnqueueWriteImage(command_queue, gaussian_memory, CL_FALSE, origin, region, 0, 0, gaussian, 0, NULL, NULL);
+  ASSERT_OPENCL_ERR(err, "Error while enqueue write gaussian image");
 }
 
 void OpenCLGaussianImage::setKernelArgsForStream()
 {
   cl_int err;
+  size = 3;
 
   gaussian_memory = clCreateImage2D(context, CL_MEM_READ_ONLY, &gaussian_format, size, size, 0, NULL, &err);
   ASSERT_OPENCL_ERR(err, "Error while creating gaussian image");
 
-  gaussian = new unsigned char[4];
+  gaussian = new float[9];
+
+  std::cout << gaussian[0] << "\n";
+  size_to_pass = new unsigned int(1);
 
   err = clSetKernelArg(kernel, 2, sizeof(cl_mem), (void*)&gaussian_memory);
   ASSERT_OPENCL_ERR(err, "Error while setting as arg: gaussian image");
 
-  size_memory = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(size_to_pass), (void*)&size_to_pass, &err);
+  size_memory = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(size_to_pass), NULL, &err);
   ASSERT_OPENCL_ERR(err, "Error while creating gaussian size");
-
+  
   err = clSetKernelArg(kernel, 3, sizeof(cl_mem), (void*)&size_memory);
   ASSERT_OPENCL_ERR(err, "Error while setting as arg: gaussian size");
 }
