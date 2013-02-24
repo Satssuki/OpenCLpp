@@ -145,8 +145,9 @@ void OpenCLGaussianImage::copyDataToGPUStream()
   gaussian[6] = 0.111111111;
   gaussian[7] = 0.111111111;
   gaussian[8] = 0.111111111;
+  std::cout << *size_to_pass << "\n";
 
-  err = clEnqueueWriteBuffer(command_queue, size_memory, CL_FALSE, 0, sizeof(size_to_pass), size_to_pass, 0, NULL, NULL);
+  err = clEnqueueWriteBuffer(command_queue, size_memory, CL_TRUE, 0, sizeof(size_to_pass), size_to_pass, 0, NULL, NULL);
   ASSERT_OPENCL_ERR(err, "Error while enqueing wirte buffer for size");
 
   err = clEnqueueWriteImage(command_queue, gaussian_memory, CL_FALSE, origin, region, 0, 0, gaussian, 0, NULL, NULL);
@@ -163,7 +164,6 @@ void OpenCLGaussianImage::setKernelArgsForStream()
 
   gaussian = new float[9];
 
-  std::cout << gaussian[0] << "\n";
   size_to_pass = new unsigned int(1);
 
   err = clSetKernelArg(kernel, 2, sizeof(cl_mem), (void*)&gaussian_memory);
