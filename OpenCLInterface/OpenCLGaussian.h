@@ -15,21 +15,25 @@ public:
   void setKernelArgs(size_t di_size, size_t do_size);
 };
 
-class OpenCLGaussinaParams : public OpenCLAlgorithmParams
+class OpenCLGaussianParams : public OpenCLAlgorithmParams
 {
   void * gaussian_mask;
   unsigned int mask_size;
   friend class OpenCLGaussianImage;
+
+public:
+  void setMask(int size, void * mask);
 };
 
 class OpenCLGaussianImage : public OpenCLImageAlgorithm
 {
+  //TODO: Check if params is set
 public:
   OpenCLGaussianImage(void);
   ~OpenCLGaussianImage(void);
 
   void setParams(const OpenCLAlgorithmParams & params);
-  void setParams(const OpenCLGaussinaParams & params);
+  void setParams(const OpenCLGaussianParams & params);
 
   //not stream
   //void prepare();
@@ -45,12 +49,12 @@ public:
 
 private:
   //params
-  OpenCLGaussinaParams params;
+  OpenCLGaussianParams params;
   
   //gaussian kernel
-  float * gaussian;
+  void * gaussian;
   unsigned int size;
-  unsigned int * size_to_pass;
+  unsigned int size_to_pass;
 
   cl_image_format gaussian_format;
   cl_mem gaussian_memory;
