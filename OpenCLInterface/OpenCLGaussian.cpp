@@ -138,16 +138,11 @@ void OpenCLGaussianImage::copyDataToGPUStream()
   size_t origin[] = {0,0,0};
   size_t region[] = {size, size, 1};
 
-  /*gaussian[0] = 0.111111111;
-  gaussian[1] = 0.111111111;
-  gaussian[2] = 0.111111111;
-  gaussian[3] = 0.111111111;
-  gaussian[4] = 0.111111111;
-  gaussian[5] = 0.111111111;
-  gaussian[6] = 0.111111111;
-  gaussian[7] = 0.111111111;
-  gaussian[8] = 0.111111111;*/
-  std::cout << size_to_pass << "\n";
+  /*for (int i=0; i<size; ++i)
+  {
+    std::cout << ((float*)gaussian)[0] << " ";
+  }
+  std::cout << "\n" << size_to_pass << "\n";*/
 
   err = clEnqueueWriteBuffer(command_queue, size_memory, CL_TRUE, 0, sizeof(size_to_pass), &size_to_pass, 0, NULL, NULL);
   ASSERT_OPENCL_ERR(err, "Error while enqueing wirte buffer for size");
@@ -159,7 +154,6 @@ void OpenCLGaussianImage::copyDataToGPUStream()
 void OpenCLGaussianImage::setKernelArgsForStream()
 {
   cl_int err;
-  size = 3;
 
   gaussian_memory = clCreateImage2D(context, CL_MEM_READ_ONLY, &gaussian_format, size, size, 0, NULL, &err);
   ASSERT_OPENCL_ERR(err, "Error while creating gaussian image");
