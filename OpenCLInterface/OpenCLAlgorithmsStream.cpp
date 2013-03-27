@@ -10,6 +10,7 @@
 OpenCLAlgorithmsStream::OpenCLAlgorithmsStream(void)
 {
   width = height = 0;
+  prepared = false;
 }
 
 
@@ -28,6 +29,8 @@ void OpenCLAlgorithmsStream::pushAlgorithm(OpenCLImageAlgorithm * al)
     ASSERT_OPENCL_ERR(0, "Wrog data types");
   }
   algorithms.push_back(al);
+
+  prepared = false;
 }
 
 void OpenCLAlgorithmsStream::clearAlgorithms()
@@ -49,6 +52,11 @@ void OpenCLAlgorithmsStream::setDataSize(size_t w, size_t h)
 
 void OpenCLAlgorithmsStream::prepare()
 {
+  if (algorithms.empty())
+  {
+    throw OpenCLAlgorithmsStreamException("Not provided any algoritm for algorithms stream");
+  }
+
   //create all kernels
   std::for_each(algorithms.begin(), algorithms.end(), [this](OpenCLImageAlgorithm* al)
   {
@@ -92,10 +100,16 @@ void OpenCLAlgorithmsStream::prepare()
     //save cl_mem for releasing
     mems.push_back(mem_tmp);
   }
+
+  prepared = true;
 }
 
 void OpenCLAlgorithmsStream::processImage(const void * data_input, void * data_output)
 {
+  if (!prepared)
+  {
+    throw OpenCLAlgorithmsStreamException("Algorithms was not prepared");
+  }
   cl_int err;
   time = 0;
   

@@ -72,6 +72,8 @@ private:
   std::list<cl_mem> mems;
   cl_context context;
   cl_command_queue command_queue;
+
+  bool prepared;
 };
 
 
