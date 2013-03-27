@@ -8,7 +8,18 @@
 
 struct OpenCLDeviceException : public OpenCLException
 {
-  OpenCLDeviceException(std::string m, int err = 0) : OpenCLException(m, err) {}
+  OpenCLDeviceException(std::string m, int err = 0, std::string s = "No source provided") :
+    OpenCLException(m, err),
+    source(s)
+  {
+  }
+
+  std::string getSource()
+  {
+    return source;
+  }
+private:
+  std::string source;
 };
 
 /**

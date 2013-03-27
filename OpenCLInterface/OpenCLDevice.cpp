@@ -110,7 +110,7 @@ cl_program OpenCLDevice::createAndBuildProgramFromSource(std::string source)
     //char buffer[4096];
     //size_t length;
     //clGetProgramBuildInfo(program,device_id,CL_PROGRAM_BUILD_LOG,sizeof(buffer),buffer,&length);
-    throw OpenCLDeviceException("Cant build program", err);    
+    throw OpenCLDeviceException("Cant build program", err, source);    
   }
   return program;
 }

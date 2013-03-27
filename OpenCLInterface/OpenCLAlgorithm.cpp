@@ -86,6 +86,7 @@ void OpenCLAlgorithm::setDevice()
 
 void OpenCLImageAlgorithm::prepareForStream(cl_command_queue cc, cl_context c)
 {
+  std::string error_string;
   command_queue = cc;
   context = c;
 
@@ -99,12 +100,14 @@ void OpenCLImageAlgorithm::prepareForStream(cl_command_queue cc, cl_context c)
   }
   else
   {
-    throw OpenCLAlgorithmException("Not written kernel");
+    error_string = "Not written kernel: " + kernel_name;
+    throw OpenCLAlgorithmException(kernel_name);
   }
  
   cl_int err;
   kernel = clCreateKernel(program, kernel_name.c_str(), &err);
-  ASSERT_OPENCL_ERR(err, "Cant create kernel");
+  error_string = "Cant create kernel: " + kernel_name;
+  ASSERT_OPENCL_ERR(err, error_string);
 
   setKernelArgsForStream();
 }

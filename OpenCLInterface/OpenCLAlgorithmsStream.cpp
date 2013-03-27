@@ -48,7 +48,7 @@ void OpenCLAlgorithmsStream::setDataSize(size_t w, size_t h)
 }
 
 void OpenCLAlgorithmsStream::prepare()
-{//TODO: test if algorithms has at least one algorithm
+{
   //create all kernels
   std::for_each(algorithms.begin(), algorithms.end(), [this](OpenCLImageAlgorithm* al)
   {
