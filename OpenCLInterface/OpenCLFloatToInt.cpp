@@ -5,15 +5,18 @@ OpenCLFloatToInt::OpenCLFloatToInt(OpenCLFloatToIntMode mode)
 {
   switch (mode)
   {
-    case OpenCLFloatToIntMode::UINT8:
+    case OpenCLFloatToIntMode::LUMINANCE_UINT8:
+    case OpenCLFloatToIntMode::RGB_UINT8:
       output_format.image_channel_data_type= CL_UNSIGNED_INT8;
       kernel_name = "floatToUInt8ThreeChannels";
       break;
-    case OpenCLFloatToIntMode::UINT16:
+    case OpenCLFloatToIntMode::LUMINANCE_UINT16:
+    case OpenCLFloatToIntMode::RGB_UINT16:
       output_format.image_channel_data_type= CL_UNSIGNED_INT16;
       kernel_name = "floatToUInt16ThreeChannels";
       break;
-    case OpenCLFloatToIntMode::UINT32:
+    case OpenCLFloatToIntMode::LUMINANCE_UINT32:
+    case OpenCLFloatToIntMode::RGB_UINT32:
       output_format.image_channel_data_type= CL_UNSIGNED_INT32;
       kernel_name = "floatToUInt32ThreeChannels";
       break;
@@ -21,9 +24,29 @@ OpenCLFloatToInt::OpenCLFloatToInt(OpenCLFloatToIntMode mode)
       throw OpenCLAlgorithmException("Something went very wrong, because there is no other options");
   }
 
-  //common
+  switch (mode)
+  {
+  case OpenCLFloatToIntMode::LUMINANCE_UINT8:
+  case OpenCLFloatToIntMode::LUMINANCE_UINT16:
+  case OpenCLFloatToIntMode::LUMINANCE_UINT32:
+    input_format.image_channel_order = CL_LUMINANCE;
+    output_format.image_channel_order = CL_LUMINANCE;
+    break;
+  case OpenCLFloatToIntMode::RGB_UINT8:
+  case OpenCLFloatToIntMode::RGB_UINT16:
+  case OpenCLFloatToIntMode::RGB_UINT32:
+    input_format.image_channel_order = CL_RGBA;
+    output_format.image_channel_order = CL_RGBA;
+    break;
+  }
+
+  //common  
+  input = output = NULL;
+  input_format.image_channel_data_type = CL_FLOAT;
+
   source_file = "conversions.cl";
-  source = "const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_NONE | CLK_FILTER_NEAREST;\n"
+  source = "";
+    /*"const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_NONE | CLK_FILTER_NEAREST;\n"
     "__kernel void  floatToUInt8ThreeChannels(__read_only image2d_t input, __write_only image2d_t output) \n"
 "{\n"
 "  \n"
@@ -61,11 +84,7 @@ OpenCLFloatToInt::OpenCLFloatToInt(OpenCLFloatToIntMode mode)
   "uint4 out = convert_uint4(pixel * 4294967295.0);\n"
 "  \n"
   "write_imageui(output, (int2)(i,j), out);\n"
-"}\n";
-  input = output = NULL;
-  input_format.image_channel_order = CL_RGBA;
-  input_format.image_channel_data_type = CL_FLOAT;
-  output_format.image_channel_order = CL_RGBA;
+"}\n";*/
 }
 
 

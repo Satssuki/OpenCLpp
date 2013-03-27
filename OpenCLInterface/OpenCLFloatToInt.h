@@ -4,9 +4,12 @@
 
 enum class OpenCLFloatToIntMode
 {
-  UINT8,
-  UINT16,
-  UINT32 
+  LUMINANCE_UINT8,
+  LUMINANCE_UINT16,
+  LUMINANCE_UINT32,
+  RGB_UINT8,
+  RGB_UINT16,
+  RGB_UINT32 
 };
 
 /**
@@ -20,7 +23,7 @@ enum class OpenCLFloatToIntMode
 class OpenCLFloatToInt : public OpenCLImageAlgorithm
 {
 public:
-  OpenCLFloatToInt(OpenCLFloatToIntMode mode = OpenCLFloatToIntMode::UINT8);
+  OpenCLFloatToInt(OpenCLFloatToIntMode mode = OpenCLFloatToIntMode::LUMINANCE_UINT8);
   ~OpenCLFloatToInt(void);
 private:
 //from OpenCLImageAlgorithm
