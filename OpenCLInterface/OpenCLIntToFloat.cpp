@@ -3,30 +3,62 @@
 
 OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
 {
+  //select resolution
   switch (mode)
   {
-  case OpenCLIntToFloatMode::UINT_8:
+  case OpenCLIntToFloatMode::LUMINANCE_UINT_8:
+  case OpenCLIntToFloatMode::RGB_UINT_8:
     input_format.image_channel_data_type = CL_UNSIGNED_INT8;
     kernel_name = "intToFloat8bit";
     break;
-  case OpenCLIntToFloatMode::UINT_10:
+  case OpenCLIntToFloatMode::LUMINANCE_UINT_10:
+  case OpenCLIntToFloatMode::RGB_UINT_10:
     input_format.image_channel_data_type = CL_UNSIGNED_INT16;
     kernel_name = "intToFloat10bit";
     break;
-  case OpenCLIntToFloatMode::UINT_12:
+  case OpenCLIntToFloatMode::LUMINANCE_UINT_12:
+  case OpenCLIntToFloatMode::RGB_UINT_12:
     input_format.image_channel_data_type = CL_UNSIGNED_INT16;
     kernel_name = "intToFloat12bit";
     break;
-  case OpenCLIntToFloatMode::UINT_16:
+  case OpenCLIntToFloatMode::LUMINANCE_UINT_16:
+  case OpenCLIntToFloatMode::RGB_UINT_16:
     input_format.image_channel_data_type = CL_UNSIGNED_INT16;
     kernel_name = "intToFloat16bit";
     break;
   default:
-    throw OpenCLAlgorithmException("Something went very wrong, because there is no other options");
+    throw OpenCLAlgorithmException("Something went very wrong, because there is no other options for OpenCLIntToFloatMode");
   }
 
-  //comon
+  //select data type
+  switch (mode)
+  {
+  case OpenCLIntToFloatMode::LUMINANCE_UINT_8:
+  case OpenCLIntToFloatMode::LUMINANCE_UINT_10:
+  case OpenCLIntToFloatMode::LUMINANCE_UINT_12:
+  case OpenCLIntToFloatMode::LUMINANCE_UINT_16:
+    input_format.image_channel_order = CL_LUMINANCE;
+    output_format.image_channel_order = CL_LUMINANCE;
+    break;
+  case OpenCLIntToFloatMode::RGB_UINT_8:
+  case OpenCLIntToFloatMode::RGB_UINT_10:
+  case OpenCLIntToFloatMode::RGB_UINT_12:
+  case OpenCLIntToFloatMode::RGB_UINT_16:
+    input_format.image_channel_order = CL_RGBA;
+    output_format.image_channel_order = CL_RGBA;
+    break;
+  default:
+    throw OpenCLAlgorithmException("Something went very wrong, because there is no other options for OpenCLIntToFloatMode and it was checked");
+  }
+
+  //common
+  input = output = NULL;
+  output_format.image_channel_data_type= CL_FLOAT;
+
+  //source
   source_file = "conversions.cl";
+  source = "";
+  /*
   source = "const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_NONE | CLK_FILTER_NEAREST;\n"
 "\n"
 "__kernel void  intToFloat8bit(__read_only image2d_t input, __write_only image2d_t output) \n"
@@ -35,10 +67,10 @@ OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
   "const int i = get_global_id(0); //row\n"
   "const int j = get_global_id(1); //column\n"
 "\n"
-  "uint4 pixel = read_imageui(input, sampler, (int2)(i,j));\n"
+"float4 pixel = convert_float4(read_imageui(input, sampler, (int2)(i,j)));\n"
 "\n"
   "float4 out;\n"
-  "out.s0 = pixel.s0 / 255.0;\n"
+  "out = pixel / 255.0;\n"
 "  \n"
   "write_imagef(output, (int2)(i,j), out);\n"
 "}\n"
@@ -52,7 +84,7 @@ OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
   "uint4 pixel = read_imageui(input, sampler, (int2)(i,j));\n"
 "\n"
   "float4 out;\n"
-  "out.s0 = pixel.s0 / 1023.0;\n"
+  "out = pixel / 1023.0;\n"
 "  \n"
   "write_imagef(output, (int2)(i,j), out);\n"
 "}\n"
@@ -66,7 +98,7 @@ OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
   "uint4 pixel = read_imageui(input, sampler, (int2)(i,j));\n"
 "\n"
   "float4 out;\n"
-  "out.s0 = pixel.s0 / 4095.0;\n"
+  "out = pixel / 4095.0;\n"
 "  \n"
   "write_imagef(output, (int2)(i,j), out);\n"
 "}\n"
@@ -80,14 +112,10 @@ OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
   "uint4 pixel = read_imageui(input, sampler, (int2)(i,j));\n"
 "\n"
   "float4 out;\n"
-  "out.s0 = pixel.s0 / 65535.0;\n"
+  "out = pixel / 65535.0;\n"
 "  \n"
   "write_imagef(output, (int2)(i,j), out);\n"
-"}\n";
-  input = output = NULL;
-  input_format.image_channel_order = CL_LUMINANCE;
-  output_format.image_channel_order = CL_LUMINANCE;
-  output_format.image_channel_data_type= CL_FLOAT;
+"}\n";*/
 }
 
 

@@ -7,10 +7,14 @@
  */
 enum class OpenCLIntToFloatMode
 {
-  UINT_8,
-  UINT_10,
-  UINT_12,
-  UINT_16
+  RGB_UINT_8,
+  RGB_UINT_10,
+  RGB_UINT_12,
+  RGB_UINT_16,
+  LUMINANCE_UINT_8,
+  LUMINANCE_UINT_10,
+  LUMINANCE_UINT_12,
+  LUMINANCE_UINT_16
 };
 
 /**
@@ -19,7 +23,7 @@ enum class OpenCLIntToFloatMode
 class OpenCLIntToFloat : public OpenCLImageAlgorithm
 {
 public:
-  OpenCLIntToFloat(OpenCLIntToFloatMode mode = OpenCLIntToFloatMode::UINT_8);
+  OpenCLIntToFloat(OpenCLIntToFloatMode mode = OpenCLIntToFloatMode::LUMINANCE_UINT_8);
   ~OpenCLIntToFloat(void);
 private:
 //from OpenCLImageAlgorithm
