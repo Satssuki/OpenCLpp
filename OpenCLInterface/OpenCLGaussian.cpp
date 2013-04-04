@@ -191,6 +191,10 @@ void OpenCLGaussianImage::setKernelArgs(size_t di_size, size_t do_size)
 
 void OpenCLGaussianParams::setMask(int size, void * mask)
 {
+  if (size % 2 != 1)
+  {
+    throw OpenCLAlgorithmException("Mask size has to be odd");
+  }
   mask_size = size;
   gaussian_mask = mask;
 }
