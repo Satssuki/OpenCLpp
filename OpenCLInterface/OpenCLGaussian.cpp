@@ -95,7 +95,7 @@ OpenCLGaussianImage::OpenCLGaussianImage()
 
   kernel_name = "gaussian";
   source_file = "gaussian.cl";
-  size = 2;
+  size = 0;
 }
 
 OpenCLGaussianImage::~OpenCLGaussianImage()
@@ -119,7 +119,9 @@ void OpenCLGaussianImage::setParams(const OpenCLGaussianParams& params)
 {
   size = params.mask_size;
   size_to_pass = size / 2;
-  gaussian = params.gaussian_mask; //TODO: copy
+  unsigned int mem_size = size * size * sizeof(float);
+  gaussian = new float[size * size];
+  memcpy(gaussian, params.gaussian_mask, mem_size); //TODO: copy
 }
 
 /*void OpenCLGaussianImage::prepareForStream(cl_command_queue cc, cl_context c)
