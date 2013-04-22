@@ -98,11 +98,21 @@ OpenCLGaussianImage::OpenCLGaussianImage()
   kernel_name = "gaussian";
   source_file = "gaussian.cl";
   size = 0;
+
+  gaussian_memory = nullptr;
+  size_memory = nullptr;
 }
 
 OpenCLGaussianImage::~OpenCLGaussianImage()
 {
-  //TODO: clear mems
+  if (gaussian_memory != nullptr)
+  {
+    ASSERT_OPENCL_ERR(clReleaseMemObject(gaussian_memory), "Error during releasing gaussian memory");
+  }
+  if (size_memory != nullptr)
+  {
+    ASSERT_OPENCL_ERR(clReleaseMemObject(size_memory), "Error during releasing gaussian memory");
+  }
 }
 
 void OpenCLGaussianImage::setParams(const OpenCLAlgorithmParams& params)

@@ -68,7 +68,7 @@ void OpenCLAlgorithmsStream::prepare()
   //creates input and outputs
   cl_int err;
 
-  //input //TODO:Change to images
+  //input
   input = clCreateImage2D(context, CL_MEM_READ_ONLY, &algorithms.front()->input_format, width, height, 0, NULL, &err);
   ASSERT_OPENCL_ERR(err, "Error while creating image2D for input");
   
