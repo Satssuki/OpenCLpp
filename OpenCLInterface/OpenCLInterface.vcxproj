@@ -118,6 +118,7 @@
     <ClInclude Include="OpenCLHelpers.h" />
     <ClInclude Include="OpenCLIntToFloat.h" />
     <ClInclude Include="OpenCLInvertImage.h" />
+    <ClInclude Include="OpenCLLaplacian.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenCLAlgorithm.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="OpenCLHelpers.cpp" />
     <ClCompile Include="OpenCLIntToFloat.cpp" />
     <ClCompile Include="OpenCLInvertImage.cpp" />
+    <ClCompile Include="OpenCLLaplacian.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
