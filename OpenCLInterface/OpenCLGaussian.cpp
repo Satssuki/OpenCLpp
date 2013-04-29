@@ -195,17 +195,17 @@ void OpenCLGaussianImage::setKernelArgsForStream()
 
 void OpenCLGaussianImage::run(const unsigned char * data_input, size_t di_size, unsigned char * data_output, size_t do_size)
 {
-
+  //nothing to do here
 }
 
 void OpenCLGaussianImage::releaseMem()
 {
-
+  //nothing to do here
 }
 
 void OpenCLGaussianImage::setKernelArgs(size_t di_size, size_t do_size)
 {
-
+  //nothing to do here
 }
 
 /************************************ OpenCLGaussianParams ********************************************/
