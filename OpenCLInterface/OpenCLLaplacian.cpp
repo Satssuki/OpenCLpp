@@ -16,7 +16,7 @@ OpenCLLaplacian::OpenCLLaplacian(void)
   laplacian_format.image_channel_data_type = CL_FLOAT;
   laplacian_format.image_channel_order = CL_LUMINANCE;  
 
-  kernel_name = "convolution";
+  kernel_name = "laplacian";
   source_file = "convolution.cl";
   size = 3;
   size_to_pass = 1;
@@ -24,9 +24,11 @@ OpenCLLaplacian::OpenCLLaplacian(void)
   float * tmp = new float[9];
   for (int i=0; i<9; ++i)
   {
-    tmp[i] = -1.0;
+    tmp[i] = -1.0f;
   }
-  tmp[4] = 8.0;
+  tmp[4] = 8.0f;
+
+  laplacian = reinterpret_cast<void*>(tmp);
 
   laplacian_memory = nullptr;
   size_memory = nullptr;
@@ -37,12 +39,14 @@ OpenCLLaplacian::~OpenCLLaplacian(void)
 {
   if (laplacian_memory != nullptr)
   {
-    ASSERT_OPENCL_ERR(clReleaseMemObject(laplacian_memory), "Error during releasing gaussian memory");
+    ASSERT_OPENCL_ERR(clReleaseMemObject(laplacian_memory), "Error during releasing laplacian memory");
   }
   if (size_memory != nullptr)
   {
-    ASSERT_OPENCL_ERR(clReleaseMemObject(size_memory), "Error during releasing gaussian memory");
+    ASSERT_OPENCL_ERR(clReleaseMemObject(size_memory), "Error during releasing laplacian memory");
   }
+
+  //TODO: Remove laplacian
 }
 
 void OpenCLLaplacian::setParams(const OpenCLAlgorithmParams& params)
@@ -75,7 +79,7 @@ void OpenCLLaplacian::copyDataToGPUStream()
   ASSERT_OPENCL_ERR(err, "Error while enqueing wirte buffer for size");
 
   err = clEnqueueWriteImage(command_queue, laplacian_memory, CL_FALSE, origin, region, 0, 0, laplacian, 0, NULL, NULL);
-  ASSERT_OPENCL_ERR(err, "Error while enqueue write gaussian image");
+  ASSERT_OPENCL_ERR(err, "Error while enqueue write laplacian image");
 }
 
 void OpenCLLaplacian::setKernelArgsForStream()
@@ -83,18 +87,14 @@ void OpenCLLaplacian::setKernelArgsForStream()
   cl_int err;
 
   laplacian_memory = clCreateImage2D(context, CL_MEM_READ_ONLY, &laplacian_format, size, size, 0, NULL, &err);
-  ASSERT_OPENCL_ERR(err, "Error while creating gaussian image");
-
-  //gaussian = new float[9];
-
-  //size_to_pass = new unsigned int(1);
-
+  ASSERT_OPENCL_ERR(err, "Error while creating laplacian image");
+  
   err = clSetKernelArg(kernel, 2, sizeof(cl_mem), (void*)&laplacian_memory);
-  ASSERT_OPENCL_ERR(err, "Error while setting as arg: gaussian image");
+  ASSERT_OPENCL_ERR(err, "Error while setting as arg: laplacian image");
 
   size_memory = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(size_to_pass), NULL, &err);
-  ASSERT_OPENCL_ERR(err, "Error while creating gaussian size");
+  ASSERT_OPENCL_ERR(err, "Error while creating laplacian size");
   
   err = clSetKernelArg(kernel, 3, sizeof(cl_mem), (void*)&size_memory);
-  ASSERT_OPENCL_ERR(err, "Error while setting as arg: gaussian size");
+  ASSERT_OPENCL_ERR(err, "Error while setting as arg: laplacian size");
 }
