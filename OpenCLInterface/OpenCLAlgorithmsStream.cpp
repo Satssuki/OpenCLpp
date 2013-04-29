@@ -39,7 +39,7 @@ void OpenCLAlgorithmsStream::clearAlgorithms()
   auto end = algorithms.end();
   for (auto al = algorithms.begin(); al != end; ++al)
   {
-   // delete *al; //TODO: Add after refactoring
+    delete *al; //TODO: Add after refactoring
     *al = 0;
   }
   algorithms.clear();
