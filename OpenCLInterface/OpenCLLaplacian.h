@@ -19,5 +19,15 @@ protected:
   //from OpenCLImageAlgorithm
   virtual void copyDataToGPUStream() = 0;
   virtual void setKernelArgsForStream() = 0;
+
+private:
+  //gaussian kernel
+  void * laplacian;
+  unsigned int size;
+  unsigned int size_to_pass;
+
+  cl_image_format laplacian_format;
+  cl_mem laplacian_memory;
+  cl_mem size_memory;
 };
 

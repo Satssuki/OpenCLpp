@@ -95,8 +95,8 @@ OpenCLGaussianImage::OpenCLGaussianImage()
   gaussian_format.image_channel_data_type = CL_FLOAT;
   gaussian_format.image_channel_order = CL_LUMINANCE;  
 
-  kernel_name = "gaussian";
-  source_file = "gaussian.cl";
+  kernel_name = "convolution";
+  source_file = "convolution.cl";
   size = 0;
 
   gaussian_memory = nullptr;
