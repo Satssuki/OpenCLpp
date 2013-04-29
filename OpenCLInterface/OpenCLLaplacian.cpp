@@ -50,6 +50,11 @@ void OpenCLLaplacian::setParams(const OpenCLAlgorithmParams& params)
   //nothing to do here, image algorithm
 }
 
+void OpenCLLaplacian::releaseMem()
+{
+  //nothing to do here, image algorithm
+}
+
 void OpenCLLaplacian::run(const unsigned char* data_input, size_t di_size, unsigned char* data_output, size_t do_size)
 {
   //nothing to do here, image algorithm
