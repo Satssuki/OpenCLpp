@@ -119,7 +119,7 @@ void OpenCLGaussianImage::setParams(const OpenCLAlgorithmParams& params)
 {
   try
   {
-    setParams(dynamic_cast<OpenCLGaussianParams&> (const_cast<OpenCLAlgorithmParams&>(params)));
+    setParams(dynamic_cast<const OpenCLGaussianParams&> (params));
   }
   catch(std::bad_cast ex)
   {
