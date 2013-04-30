@@ -108,6 +108,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="OpenCl3DImageAlgorithm.h" />
     <ClInclude Include="OpenCLAlgorithm.h" />
     <ClInclude Include="OpenCLAlgorithmsStream.h" />
     <ClInclude Include="OpenCLBayerFilter.h" />
@@ -121,6 +122,7 @@
     <ClInclude Include="OpenCLLaplacian.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="OpenCl3DImageAlgorithm.cpp" />
     <ClCompile Include="OpenCLAlgorithm.cpp" />
     <ClCompile Include="OpenCLAlgorithmsStream.cpp" />
     <ClCompile Include="OpenCLBayerFilter.cpp" />
