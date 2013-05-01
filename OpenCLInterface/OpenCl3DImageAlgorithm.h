@@ -58,9 +58,6 @@ public:
    */
   double getTime();
 protected:
-
-
-private:
   size_t height, width, depth;
 
   double time;
@@ -73,6 +70,7 @@ private:
 
   bool prepared;
 
+private:
   /**
    * Clears algorithm.
    */

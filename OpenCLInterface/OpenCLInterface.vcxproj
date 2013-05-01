@@ -115,6 +115,7 @@
     <ClInclude Include="OpenCLCommon.h" />
     <ClInclude Include="OpenCLDevice.h" />
     <ClInclude Include="OpenCLException.h" />
+    <ClInclude Include="OpenCLFindMaxin3DImage.h" />
     <ClInclude Include="OpenCLFloatToInt.h" />
     <ClInclude Include="OpenCLGaussian.h" />
     <ClInclude Include="OpenCLHelpers.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="OpenCLCommon.cpp" />
     <ClCompile Include="OpenCLDevice.cpp" />
     <ClCompile Include="OpenCLException.cpp" />
+    <ClCompile Include="OpenCLFindMaxin3DImage.cpp" />
     <ClCompile Include="OpenCLFloatToInt.cpp" />
     <ClCompile Include="OpenCLGaussian.cpp" />
     <ClCompile Include="OpenCLHelpers.cpp" />

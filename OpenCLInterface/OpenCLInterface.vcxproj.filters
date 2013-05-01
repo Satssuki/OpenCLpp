@@ -54,6 +54,9 @@
     <ClInclude Include="OpenCLCommon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OpenCLFindMaxin3DImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenCLAlgorithm.cpp">
@@ -93,6 +96,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OpenCLCommon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCLFindMaxin3DImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
