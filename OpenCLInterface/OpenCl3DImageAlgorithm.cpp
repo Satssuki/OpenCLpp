@@ -43,6 +43,8 @@ void OpenCL3DImageAlgorithm::prepare()
     //clear old algo
   }
 
+  createKernel();
+
   cl_int err;
 
   input_image_memory = clCreateImage3D(context, CL_MEM_READ_ONLY, &input_image_format, width, height, depth, 0, 0, NULL, &err);

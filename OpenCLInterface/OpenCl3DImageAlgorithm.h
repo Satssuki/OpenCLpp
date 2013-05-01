@@ -2,6 +2,7 @@
 
 #include "OpenCLDevice.h"
 #include "OpenCLException.h"
+#include "OpenCLCommon.h"
 
 /** Exception for OpenCL3DImageAlgorithm 
  * 
@@ -18,7 +19,7 @@ public:
 /** Class for algorithms manipulating 3D images.
  * Simple framework.
  */
-class OpenCL3DImageAlgorithm
+class OpenCL3DImageAlgorithm : public OpenCLCommon
 {
 public:
   /**
