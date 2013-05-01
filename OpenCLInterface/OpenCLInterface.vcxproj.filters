@@ -51,6 +51,9 @@
     <ClInclude Include="OpenCl3DImageAlgorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OpenCLCommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenCLAlgorithm.cpp">
@@ -87,6 +90,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OpenCl3DImageAlgorithm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCLCommon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
