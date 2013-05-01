@@ -78,5 +78,9 @@ void OpenCL3DImageAlgorithm::processImage(const void* data_input, void* data_out
   err = clEnqueueWriteImage(command_queue, input_image_memory, CL_FALSE, origin, region, 0, 0, data_input, 0, NULL, NULL);
   ASSERT_OPENCL_ERR(err, "Error while enqueue write image 3D");
 
+  enqueueNDRangeKernelWithTimeMeasurment(3, NULL, region, NULL, 0);
+
+  err = clEnqueueReadImage(command_queue, output_image_memory, CL_TRUE, origin, region, 0, 0, data_output, 0, NULL, NULL);
+  ASSERT_OPENCL_ERR(err, "Error while enqueue read image 3D");
 
 }
