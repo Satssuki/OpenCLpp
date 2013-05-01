@@ -21,10 +21,20 @@ public:
   ~OpenCLCommon(void);
   
   /**
+   * Set device to algorithm.
+   * @param device OpenCLDevice to set.
+   */
+  void setDevice(const OpenCLDevice & dev);
+  
+  /**
    * Creates kernel from members. If file name is specified it uses file to get kernel source.
    * If not it tries to use source stored in std::string. If none of this option available it's throws exception.
    */
   void createKernel();
+  
+  /**
+   */
+  void enqueueNDRangeKernelWithTimeMeasurment(cl_uint work_dim, size_t * global_work_offset, const size_t *global_work_size, const size_t *local_work_size, cl_uint num_events_in_wait_list);
   
 protected:
   /** file name with kernel source
@@ -39,6 +49,10 @@ protected:
   */
   std::string kernel_name;
 
+  /** time consumed by kernel
+  */
+  double time;
+
   /** device
   */
   OpenCLDevice device;
@@ -50,5 +64,16 @@ protected:
   /** cl_kernel
   */
   cl_kernel kernel;
+  
+  /** cl_context 
+   */
+  cl_context context;
+  
+  /** cl_command_queue
+   */
+  cl_command_queue command_queue;
+
+private:
+  void setDevice();
 };
 

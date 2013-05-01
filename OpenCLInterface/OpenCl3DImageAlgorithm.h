@@ -63,13 +63,7 @@ protected:
 private:
   size_t height, width, depth;
 
-  OpenCLDevice device;
-  cl_kernel kernel;
-
   double time;
-
-  cl_context context;
-  cl_command_queue command_queue;
 
   cl_mem input_image_memory;
   cl_mem output_image_memory;
