@@ -50,9 +50,31 @@ public:
   {
     return time;
   }
-
+  
+  /**
+   * Prepare algorithm. Data size need to be set. If not there will be error.
+   */
+  virtual void prepare();
+  
+  /**
+   * Process data with algorithm.
+   * @param data_input Pointer to input data.
+   * @param data_output Pointer to output data.
+   */
+  virtual void processData(const void * data_input, void * data_output);
   
 protected:
+  
+  /**
+   * Set arguments 0(input data) and 1(output data) for kernel.
+   */
+  virtual void setIOArguments() = 0;
+  
+  /**
+   * Set other sarguments (2 and above) for kernel. It's algorithm specific arguments.
+   */
+  virtual void setOtherArguments() = 0;
+  
   /** file name with kernel source
    */
   std::string source_filename;

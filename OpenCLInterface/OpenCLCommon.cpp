@@ -44,7 +44,7 @@ void OpenCLCommon::createKernel()
   else
   {
     std::string error_string = "Not written kernel: " + kernel_name;
-    throw OpenCLException(kernel_name, 0);
+    throw OpenCLException(error_string, 0);
   }
  
   cl_int err;

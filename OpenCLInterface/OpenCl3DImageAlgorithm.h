@@ -17,7 +17,8 @@ public:
 };
 
 /** Class for algorithms manipulating 3D images.
- * Simple framework.
+ * Simple framework. It does not work with many NVIDIA devices, because they not support writing 3D images.
+ * Should work on some AMD devices.
  */
 class OpenCL3DImageAlgorithm : public OpenCLCommon
 {
