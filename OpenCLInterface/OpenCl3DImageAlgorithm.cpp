@@ -7,9 +7,7 @@
 
 OpenCL3DImageAlgorithm::OpenCL3DImageAlgorithm(void) : OpenCLImageCommon()
 {
-  input_image_memory = output_image_memory = nullptr;
   width = height = depth = 0;
-  prepared = false;
 }
 
 OpenCL3DImageAlgorithm::~OpenCL3DImageAlgorithm(void)

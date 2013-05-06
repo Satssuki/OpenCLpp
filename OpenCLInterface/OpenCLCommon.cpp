@@ -7,6 +7,7 @@
 
 OpenCLCommon::OpenCLCommon(void)
 {
+  prepared = false;
 }
 
 

@@ -8,6 +8,7 @@
 
 OpenCLImageCommon::OpenCLImageCommon(void) : OpenCLCommon()
 {
+  input_image_memory = output_image_memory = nullptr;
 }
 
 
