@@ -9,8 +9,8 @@ OpenCLFindMaxin3DImage::OpenCLFindMaxin3DImage(void)
   input_image_format.image_channel_data_type = CL_UNSIGNED_INT8;
   input_image_format.image_channel_order = CL_LUMINANCE;
     
-  input_image_format.image_channel_data_type = CL_UNSIGNED_INT8;
-  input_image_format.image_channel_order = CL_LUMINANCE;
+  output_image_format.image_channel_data_type = CL_UNSIGNED_INT8;
+  output_image_format.image_channel_order = CL_LUMINANCE;
 }
 
 
