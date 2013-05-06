@@ -40,12 +40,6 @@ public:
    * @param d Image depth.
    */
   void setDataSize(size_t w, size_t h, size_t d);
-
-  /**
-   * Get gime consumed on algorithm execution.
-   * @return Time in ms.
-   */
-  double getTime();
 protected:
   /**
    * set IO args.

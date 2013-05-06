@@ -42,8 +42,6 @@ void OpenCL3DImageAlgorithm::setIOArguments()
   ASSERT_OPENCL_ERR(err, "Cant set kernel arg 1 of OpenCL3DImageAlgorithm");
 }
 
-
-
 void OpenCL3DImageAlgorithm::setOtherArguments()
 {
   //none

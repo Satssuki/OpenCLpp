@@ -19,7 +19,7 @@ void OpenCLImageCommon::processData(const void* data_input, void* data_output)
 {
   if (!prepared)
   {
-    throw OpenCL3DImageException("Algorithm is not preapred");
+    throw OpenCLAlgorithmException("Algorithm is not preapred");
   }
 
   cl_int err;
