@@ -14,6 +14,7 @@ OpenCLImageCommon::OpenCLImageCommon(void) : OpenCLCommon()
 
 OpenCLImageCommon::~OpenCLImageCommon(void)
 {
+  clearAlgorithm();
 }
 
 void OpenCLImageCommon::processData(const void* data_input, void* data_output)

@@ -12,7 +12,6 @@ OpenCL3DImageAlgorithm::OpenCL3DImageAlgorithm(void) : OpenCLImageCommon()
 
 OpenCL3DImageAlgorithm::~OpenCL3DImageAlgorithm(void)
 {
-  clearAlgorithm();
 }
 
 
