@@ -72,3 +72,17 @@ void OpenCLCommon::enqueueNDRangeKernelWithTimeMeasurment(cl_uint work_dim, size
   time = (end - start) / 1000000.0;
   clReleaseEvent(event);
 }
+
+void OpenCLCommon::prepare()
+{
+  if (prepared)
+  {
+    //clear old algo
+  }
+
+  createKernel();
+  setIOArguments();
+  setOtherArguments();
+
+  prepared = true;
+}

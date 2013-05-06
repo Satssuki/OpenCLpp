@@ -1,5 +1,5 @@
 #pragma once
-#include "OpenCLCommon.h"
+#include "OpenCLImageCommon.h"
 
 /** Exception for OpenCL3DTo3DImageAlgorithm
  * 
@@ -16,7 +16,7 @@ public:
 /** Class for algorithms that support reading 3D image and stores data in 2D image.
  * 
  */
-class OpenCL3DTo2DImageAlgorithm : public OpenCLCommon
+class OpenCL3DTo2DImageAlgorithm : public OpenCLImageCommon
 {
 public:
   /** 
@@ -36,5 +36,16 @@ public:
    * @param d Image depth.
    */
   void setDataSize(size_t w, size_t h, size_t d);
+  
+protected:
+  /**
+   * set IO args.
+   */
+  void setIOArguments();
+  
+  /**
+   * set other args.
+   */
+  void setOtherArguments();
 };
 

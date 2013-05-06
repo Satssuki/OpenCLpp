@@ -5,7 +5,7 @@
   throw OpenCL3DImageException(MSG, ERR); \
 }
 
-OpenCL3DImageAlgorithm::OpenCL3DImageAlgorithm(void)
+OpenCL3DImageAlgorithm::OpenCL3DImageAlgorithm(void) : OpenCLImageCommon()
 {
   input_image_memory = output_image_memory = nullptr;
   width = height = depth = 0;
@@ -36,15 +36,8 @@ void OpenCL3DImageAlgorithm::setDataSize(size_t w, size_t h, size_t d)
   depth = d;
 }
 
-void OpenCL3DImageAlgorithm::prepare()
+void OpenCL3DImageAlgorithm::setIOArguments()
 {
-  if (prepared)
-  {
-    //clear old algo
-  }
-
-  createKernel();
-
   cl_int err;
 
   input_image_memory = clCreateImage3D(context, CL_MEM_READ_ONLY, &input_image_format, width, height, depth, 0, 0, NULL, &err);
@@ -58,29 +51,11 @@ void OpenCL3DImageAlgorithm::prepare()
 
   err = clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *) &output_image_memory);
   ASSERT_OPENCL_ERR(err, "Cant set kernel arg 1 of OpenCL3DImageAlgorithm");
-
-  prepared = true;
 }
 
-void OpenCL3DImageAlgorithm::processImage(const void* data_input, void* data_output)
+
+
+void OpenCL3DImageAlgorithm::setOtherArguments()
 {
-  if (!prepared)
-  {
-    throw OpenCL3DImageException("Algorithm is not preapred");
-  }
-
-  cl_int err;
-  time = 0;
-
-  size_t origin[] = {0,0,0};
-  size_t region[] = {width, height, depth};
-
-  err = clEnqueueWriteImage(command_queue, input_image_memory, CL_FALSE, origin, region, 0, 0, data_input, 0, NULL, NULL);
-  ASSERT_OPENCL_ERR(err, "Error while enqueue write image 3D");
-
-  enqueueNDRangeKernelWithTimeMeasurment(3, NULL, region, NULL, 0);
-
-  err = clEnqueueReadImage(command_queue, output_image_memory, CL_TRUE, origin, region, 0, 0, data_output, 0, NULL, NULL);
-  ASSERT_OPENCL_ERR(err, "Error while enqueue read image 3D");
-
+  //none
 }

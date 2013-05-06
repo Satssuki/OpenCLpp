@@ -18,7 +18,7 @@ public:
   /**
    * Destructor.
    */
-  ~OpenCLCommon(void);
+  virtual ~OpenCLCommon(void);
   
   /**
    * Set device to algorithm.
@@ -54,14 +54,14 @@ public:
   /**
    * Prepare algorithm. Data size need to be set. If not there will be error.
    */
-  virtual void prepare();
+  void prepare();
   
   /**
    * Process data with algorithm.
    * @param data_input Pointer to input data.
    * @param data_output Pointer to output data.
    */
-  virtual void processData(const void * data_input, void * data_output);
+  virtual void processData(const void * data_input, void * data_output) = 0;
   
 protected:
   
@@ -90,6 +90,10 @@ protected:
   /** time consumed by kernel
   */
   double time;
+  
+  /** If algorithm was prepared
+   */
+  bool prepared;
 
   /** device
   */

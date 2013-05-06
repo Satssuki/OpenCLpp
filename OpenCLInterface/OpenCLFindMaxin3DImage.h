@@ -1,8 +1,8 @@
 #pragma once
 
-#include "OpenCl3DImageAlgorithm.h"
+#include "OpenCL3DTo2DImageAlgorithm.h"
 
-class OpenCLFindMaxin3DImage :  public OpenCL3DImageAlgorithm
+class OpenCLFindMaxin3DImage :  public OpenCL3DTo2DImageAlgorithm
 {
 public:
   OpenCLFindMaxin3DImage(void);

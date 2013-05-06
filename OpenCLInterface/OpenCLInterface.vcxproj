@@ -120,6 +120,7 @@
     <ClInclude Include="OpenCLFloatToInt.h" />
     <ClInclude Include="OpenCLGaussian.h" />
     <ClInclude Include="OpenCLHelpers.h" />
+    <ClInclude Include="OpenCLImageCommon.h" />
     <ClInclude Include="OpenCLIntToFloat.h" />
     <ClInclude Include="OpenCLInvertImage.h" />
     <ClInclude Include="OpenCLLaplacian.h" />
@@ -137,6 +138,7 @@
     <ClCompile Include="OpenCLFloatToInt.cpp" />
     <ClCompile Include="OpenCLGaussian.cpp" />
     <ClCompile Include="OpenCLHelpers.cpp" />
+    <ClCompile Include="OpenCLImageCommon.cpp" />
     <ClCompile Include="OpenCLIntToFloat.cpp" />
     <ClCompile Include="OpenCLInvertImage.cpp" />
     <ClCompile Include="OpenCLLaplacian.cpp" />
