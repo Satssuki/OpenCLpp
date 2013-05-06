@@ -17,17 +17,6 @@ OpenCL3DImageAlgorithm::~OpenCL3DImageAlgorithm(void)
   clearAlgorithm();
 }
 
-void OpenCL3DImageAlgorithm::clearAlgorithm()
-{
-  if (input_image_memory != nullptr)
-  {
-    clReleaseMemObject(input_image_memory);
-  }
-  if (output_image_memory != nullptr)
-  {
-    clReleaseMemObject(output_image_memory);
-  }
-}
 
 void OpenCL3DImageAlgorithm::setDataSize(size_t w, size_t h, size_t d)
 {

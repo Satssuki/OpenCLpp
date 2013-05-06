@@ -16,6 +16,11 @@ protected:
    */
   void processData(const void * data_input, void * data_output);
   
+  /**
+   * Clears algorithm.
+   */
+  void clearAlgorithm();
+  
   size_t height, width, depth;
   
   cl_mem input_image_memory;

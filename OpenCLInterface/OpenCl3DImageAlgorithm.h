@@ -57,9 +57,4 @@ protected:
    */
   void setOtherArguments();
   
-private:
-  /**
-   * Clears algorithm.
-   */
-  void clearAlgorithm();
 };
