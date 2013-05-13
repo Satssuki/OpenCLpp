@@ -32,7 +32,7 @@ void OpenCL3DImageAlgorithm::setIOArguments()
   err = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *) &input_image_memory);
   ASSERT_OPENCL_ERR(err, "Cant set kernel arg 0 of OpenCL3DImageAlgorithm");
 
-  output_image_memory = clCreateImage3D(context, CL_MEM_READ_ONLY, &output_image_format, width, height, depth, 0, 0, NULL, &err);
+  output_image_memory = clCreateImage3D(context, CL_MEM_WRITE_ONLY, &output_image_format, width, height, depth, 0, 0, NULL, &err);
   ASSERT_OPENCL_ERR(err, "Error while creating image3D for output in OpenCL3DImageAlgorithm");
 
   err = clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *) &output_image_memory);

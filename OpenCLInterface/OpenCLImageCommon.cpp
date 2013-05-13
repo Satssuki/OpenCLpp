@@ -27,6 +27,7 @@ void OpenCLImageCommon::processData(const void* data_input, void* data_output)
   cl_int err;
   time = 0;
 
+  //TODO: remove brackets
   size_t origin[] = {0,0,0};
   {
     size_t region[] = {width, height, depth};
