@@ -126,7 +126,7 @@ void OpenCLLaplacian::setKernelArgsForStream()
 
 /*** OpenCLLaplacianParams ***/
 
-void OpenCLLaplacianParams::setSigma(unsigned int sigma) //TODO: Go to double
+void OpenCLLaplacianParams::setSigma(float sigma)
 {
   this->sigma = sigma;
 }

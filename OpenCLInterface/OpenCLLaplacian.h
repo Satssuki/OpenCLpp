@@ -6,7 +6,7 @@
  */
 class OpenCLLaplacianParams : public OpenCLAlgorithmParams
 {
-  unsigned int sigma;
+  float sigma;
   friend class OpenCLLaplacian;
 
 public:
@@ -14,7 +14,7 @@ public:
    * Set gain.
    * @param gain usigned int.
    */
-  void setSigma(unsigned int sigma);
+  void setSigma(float sigma);
 };
 
 
@@ -45,7 +45,7 @@ private:
   void * laplacian;
   unsigned int size;
   unsigned int size_to_pass;
-  int sigma;
+  float sigma;
 
   cl_image_format laplacian_format;
   cl_mem laplacian_memory;
