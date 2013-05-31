@@ -115,6 +115,7 @@
     <ClInclude Include="OpenCLBayerFilter.h" />
     <ClInclude Include="OpenCLCommon.h" />
     <ClInclude Include="OpenCLDevice.h" />
+    <ClInclude Include="OpenCLEdgeDetector.h" />
     <ClInclude Include="OpenCLException.h" />
     <ClInclude Include="OpenCLFindMaxin3DImage.h" />
     <ClInclude Include="OpenCLFloatToInt.h" />
@@ -133,6 +134,7 @@
     <ClCompile Include="OpenCLBayerFilter.cpp" />
     <ClCompile Include="OpenCLCommon.cpp" />
     <ClCompile Include="OpenCLDevice.cpp" />
+    <ClCompile Include="OpenCLEdgeDetector.cpp" />
     <ClCompile Include="OpenCLException.cpp" />
     <ClCompile Include="OpenCLFindMaxin3DImage.cpp" />
     <ClCompile Include="OpenCLFloatToInt.cpp" />
