@@ -165,8 +165,8 @@ void OpenCLGaussianImage::copyDataToGPUStream()
   }
   std::cout << "\n" << size_to_pass << "\n";*/
 
-  err = clEnqueueWriteBuffer(command_queue, size_memory, CL_TRUE, 0, sizeof(size_to_pass), &size_to_pass, 0, NULL, NULL);
-  ASSERT_OPENCL_ERR(err, "Error while enqueing wirte buffer for size");
+  /*err = clEnqueueWriteBuffer(command_queue, size_memory, CL_TRUE, 0, sizeof(size_to_pass), &size_to_pass, 0, NULL, NULL);
+  ASSERT_OPENCL_ERR(err, "Error while enqueing wirte buffer for size");*/
 
   err = clEnqueueWriteImage(command_queue, gaussian_memory, CL_FALSE, origin, region, 0, 0, gaussian, 0, NULL, NULL);
   ASSERT_OPENCL_ERR(err, "Error while enqueue write gaussian image");
@@ -186,10 +186,10 @@ void OpenCLGaussianImage::setKernelArgsForStream()
   err = clSetKernelArg(kernel, 2, sizeof(cl_mem), (void*)&gaussian_memory);
   ASSERT_OPENCL_ERR(err, "Error while setting as arg: gaussian image");
 
-  size_memory = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(size_to_pass), NULL, &err);
-  ASSERT_OPENCL_ERR(err, "Error while creating gaussian size");
+  /*size_memory = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(size_to_pass), NULL, &err);
+  ASSERT_OPENCL_ERR(err, "Error while creating gaussian size");*/
   
-  err = clSetKernelArg(kernel, 3, sizeof(cl_mem), (void*)&size_memory);
+  err = clSetKernelArg(kernel, 3, sizeof(cl_mem), (void*)&size_to_pass);
   ASSERT_OPENCL_ERR(err, "Error while setting as arg: gaussian size");
 }
 

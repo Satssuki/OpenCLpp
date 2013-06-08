@@ -166,3 +166,5 @@ gtest*.props
 
 #temporary netbeans
 nbproject
+
+*.cd

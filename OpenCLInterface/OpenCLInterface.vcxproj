@@ -113,7 +113,9 @@
     <ClInclude Include="OpenCLAlgorithm.h" />
     <ClInclude Include="OpenCLAlgorithmsStream.h" />
     <ClInclude Include="OpenCLBayerFilter.h" />
+    <ClInclude Include="OpenCLBlobDetector.h" />
     <ClInclude Include="OpenCLCommon.h" />
+    <ClInclude Include="OpenCLCornerDetector.h" />
     <ClInclude Include="OpenCLDevice.h" />
     <ClInclude Include="OpenCLEdgeDetector.h" />
     <ClInclude Include="OpenCLException.h" />
@@ -132,7 +134,9 @@
     <ClCompile Include="OpenCLAlgorithm.cpp" />
     <ClCompile Include="OpenCLAlgorithmsStream.cpp" />
     <ClCompile Include="OpenCLBayerFilter.cpp" />
+    <ClCompile Include="OpenCLBlobDetector.cpp" />
     <ClCompile Include="OpenCLCommon.cpp" />
+    <ClCompile Include="OpenCLCornerDetector.cpp" />
     <ClCompile Include="OpenCLDevice.cpp" />
     <ClCompile Include="OpenCLEdgeDetector.cpp" />
     <ClCompile Include="OpenCLException.cpp" />
@@ -144,6 +148,9 @@
     <ClCompile Include="OpenCLIntToFloat.cpp" />
     <ClCompile Include="OpenCLInvertImage.cpp" />
     <ClCompile Include="OpenCLLaplacian.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
