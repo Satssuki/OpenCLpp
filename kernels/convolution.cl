@@ -26,7 +26,31 @@ __kernel void  gaussian_not_image( __constant float * mask, __global float* inpu
 const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_MIRRORED_REPEAT | CLK_FILTER_NEAREST;
 
 
-__kernel void  convolution(__read_only image2d_t input, __write_only image2d_t output, __read_only image2d_t gaussian, __private __read_only uint size) 
+__kernel void  convolution(__read_only image2d_t input, __write_only image2d_t output, __global float * gaussian, __private __read_only uint size) 
+{
+  int width_output = get_global_size(0); 
+  int width = get_global_size(0); 
+
+  int i = get_global_id(0); //column number
+  int j = get_global_id(1); //row number
+  float4 sum = (0.0,0.0,0.0,0.0);
+//  write_imagef(output, (int2)(i,j), sum);
+  
+  int sizeq = size;
+  int gi = 0;
+  for (int i_gaussian = -sizeq; i_gaussian <= sizeq; ++i_gaussian)
+  {
+	for (int j_gaussian = -sizeq; j_gaussian <= sizeq; ++j_gaussian)
+	{
+	 	sum += (read_imagef(input, sampler, (int2)(i + i_gaussian, j + j_gaussian)) * gaussian[gi++]);
+	}
+  }
+  
+  write_imagef(output, (int2)(i,j), sum);
+    
+}
+
+__kernel void  convolution_image(__read_only image2d_t input, __write_only image2d_t output, __read_only image2d_t gaussian, __private __read_only uint size) 
 {
   int width_output = get_global_size(0); 
   int width = get_global_size(0); 
