@@ -168,7 +168,7 @@ void OpenCLGaussianImage::copyDataToGPUStream()
   /*err = clEnqueueWriteBuffer(command_queue, size_memory, CL_TRUE, 0, sizeof(size_to_pass), &size_to_pass, 0, NULL, NULL);
   ASSERT_OPENCL_ERR(err, "Error while enqueing wirte buffer for size");*/
 
-  err = clEnqueueWriteBuffer(command_queue, gaussian_memory, CL_FALSE, 0, size * size, gaussian, 0, NULL, NULL);
+  err = clEnqueueWriteBuffer(command_queue, gaussian_memory, CL_FALSE, 0, size * size * sizeof(float) , gaussian, 0, NULL, NULL);
   ASSERT_OPENCL_ERR(err, "Error while enqueue write gaussian buffer");
 
   /*err = clEnqueueWriteImage(command_queue, gaussian_memory, CL_FALSE, origin, region, 0, 0, gaussian, 0, NULL, NULL);
@@ -182,7 +182,7 @@ void OpenCLGaussianImage::setKernelArgsForStream()
   /*gaussian_memory = clCreateImage2D(context, CL_MEM_READ_ONLY, &gaussian_format, size, size, 0, NULL, &err);
   ASSERT_OPENCL_ERR(err, "Error while creating gaussian image");*/
 
-  gaussian_memory = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(gaussian), NULL, &err);
+  gaussian_memory = clCreateBuffer(context, CL_MEM_READ_ONLY, size * size * sizeof(float), NULL, &err);
   ASSERT_OPENCL_ERR(err, "Error while creating gaussian buffer");
 
   //gaussian = new float[9];

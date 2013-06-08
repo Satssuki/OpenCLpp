@@ -75,6 +75,14 @@ protected:
    */
   virtual void setOtherArguments() = 0;
   
+  /**
+   * Sets kernel nr argument.
+   * @param nr Argument number.
+   * @param argument Pointer to cl_mem.
+   * @return Returns 0 in success and OpenCL error number otherwise.
+   */
+  cl_int setKernelArg(int nr, const void * argument, size_t size = sizeof(cl_mem));
+  
   /** file name with kernel source
    */
   std::string source_filename;

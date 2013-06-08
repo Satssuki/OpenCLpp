@@ -40,13 +40,13 @@ __kernel void  edge_detector(__read_only image2d_t input, __write_only image2d_t
 	float Lxx =  l -  c + r;
 	float Lxy =  d + u - c;
 		*/
-	float Lxxx =  0.5 * (r - l);
+	float Lxxx =  0.5 * (ul + dl - ur - dr) + l - r;
 	float Lxxy =  - ul / 8.0 + u / 4.0 - ur / 8.0
 					+ dl / 8.0 - d / 4.0 + dr / 8.0;
 	float Lxyy =  ul / 8.0 - ur / 8.0
 					- l / 4.0 + r / 4.0
 					+ dl / 8.0 - dr / 8.0;
-	float Lyyy =  0.5 * (d - u);
+	float Lyyy =  0.5 * (ul + ur - dr - dl) + u - d;
 	
 	float4 Lvv = (0.0, 0.0, 0.0, 0.0);
 	Lvv.x = fabs(Lx * Lx * Lxx + 2.0 * Lx * Ly * Lxy + Ly * Ly * Lyy);

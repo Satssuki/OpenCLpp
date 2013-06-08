@@ -87,3 +87,8 @@ void OpenCLCommon::prepare()
 
   prepared = true;
 }
+
+cl_int OpenCLCommon::setKernelArg(int nr, const void* argument, size_t size)
+{
+  return clSetKernelArg(kernel, nr, size, argument);
+}
