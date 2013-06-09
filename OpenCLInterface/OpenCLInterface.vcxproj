@@ -108,6 +108,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="OpenCL2DTo2DImageAlgorithm.h" />
     <ClInclude Include="OpenCl3DImageAlgorithm.h" />
     <ClInclude Include="OpenCL3DTo2DImageAlgorithm.h" />
     <ClInclude Include="OpenCLAlgorithm.h" />
@@ -129,6 +130,7 @@
     <ClInclude Include="OpenCLLaplacian.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="OpenCL2DTo2DImageAlgorithm.cpp" />
     <ClCompile Include="OpenCl3DImageAlgorithm.cpp" />
     <ClCompile Include="OpenCL3DTo2DImageAlgorithm.cpp" />
     <ClCompile Include="OpenCLAlgorithm.cpp" />
