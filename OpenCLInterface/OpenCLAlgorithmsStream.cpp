@@ -105,7 +105,7 @@ void OpenCLAlgorithmsStream::prepare()
   prepared = true;
 }
 
-void OpenCLAlgorithmsStream::processImage(const void * data_input, void * data_output)
+void OpenCLAlgorithmsStream::processImage(const void * data_input, void * data_output, unsigned int from)
 {
   if (!prepared)
   {
@@ -122,10 +122,15 @@ void OpenCLAlgorithmsStream::processImage(const void * data_input, void * data_o
   err = clEnqueueWriteImage(command_queue, input, CL_FALSE, origin, region, 0, 0, data_input, 0, NULL, NULL);
   ASSERT_OPENCL_ERR(err, "Cant set equeue write input image");
 
-  std::for_each(algorithms.begin(), algorithms.end(), [&global_work_size, this](OpenCLAlgorithmForStream *al)
+  unsigned int i = 0;
+
+  std::for_each(algorithms.begin(), algorithms.end(), [&global_work_size, &i, &from, this](OpenCLAlgorithmForStream *al)
   {
-    al->runStream(global_work_size);
-    time += al->getTime();
+    if (i >= from)
+    {
+      al->runStream(global_work_size);
+      time += al->getTime();
+    }
   });
 
   err = clEnqueueReadImage(command_queue, output, CL_TRUE, origin, region, 0, 0, data_output, 0, NULL, NULL);

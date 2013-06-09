@@ -52,8 +52,9 @@ public:
    * Execute stream. This function executes all algorithms in stream in order. Must call prepare and setDevice before.
    * @param data_input Pointer to data input.
    * @param data_output Pointer to data output.
+   * @param from Number of algorithm form which to start.
    */
-  void processImage(const void * data_input, void * data_output);
+  void processImage(const void * data_input, void * data_output, unsigned int from = 0);
   /**
    * Set device for executing.
    * @param d Device.
