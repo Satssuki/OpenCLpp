@@ -1,6 +1,7 @@
 #pragma once
 
 #include "OpenCLDevice.h"
+#include "OpenCLAlgorithmParams.h"
 
 #include <string>
 
@@ -62,6 +63,8 @@ public:
    * @param data_output Pointer to output data.
    */
   virtual void processData(const void * data_input, void * data_output) = 0;
+
+  virtual void setParams(const OpenCLAlgorithmParams & params);
   
 protected:
   

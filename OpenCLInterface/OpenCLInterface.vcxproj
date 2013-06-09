@@ -109,10 +109,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="OpenCL2DTo2DImageAlgorithm.h" />
+    <ClInclude Include="OpenCL2DTo2DImageAlgorithmForStream.h" />
     <ClInclude Include="OpenCl3DImageAlgorithm.h" />
     <ClInclude Include="OpenCL3DTo2DImageAlgorithm.h" />
     <ClInclude Include="OpenCLAlgorithm.h" />
     <ClInclude Include="OpenCLAlgorithmForStream.h" />
+    <ClInclude Include="OpenCLAlgorithmParams.h" />
     <ClInclude Include="OpenCLAlgorithmsStream.h" />
     <ClInclude Include="OpenCLBayerFilter.h" />
     <ClInclude Include="OpenCLBlobDetector.h" />
@@ -132,10 +134,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenCL2DTo2DImageAlgorithm.cpp" />
+    <ClCompile Include="OpenCL2DTo2DImageAlgorithmForStream.cpp" />
     <ClCompile Include="OpenCl3DImageAlgorithm.cpp" />
     <ClCompile Include="OpenCL3DTo2DImageAlgorithm.cpp" />
     <ClCompile Include="OpenCLAlgorithm.cpp" />
     <ClCompile Include="OpenCLAlgorithmForStream.cpp" />
+    <ClCompile Include="OpenCLAlgorithmParams.cpp" />
     <ClCompile Include="OpenCLAlgorithmsStream.cpp" />
     <ClCompile Include="OpenCLBayerFilter.cpp" />
     <ClCompile Include="OpenCLBlobDetector.cpp" />

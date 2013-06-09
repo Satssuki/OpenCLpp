@@ -2,15 +2,11 @@
 
 #include "OpenCLDevice.h"
 #include "OpenCLException.h"
+#include "OpenCLAlgorithmParams.h"
 
 struct OpenCLAlgorithmException : public OpenCLException
 {
   OpenCLAlgorithmException(std::string m, int e = 0) : OpenCLException(m,e) {}
-};
-
-class OpenCLAlgorithmParams {
-public:
-  virtual ~OpenCLAlgorithmParams() {};
 };
 
 /**

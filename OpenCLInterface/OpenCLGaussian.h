@@ -1,6 +1,7 @@
 #pragma once
 
 #include "OpenCLAlgorithm.h"
+#include "OpenCL2DTo2DImageAlgorithmForStream.h"
 
 class OpenCLGaussian : public OpenCLAlgorithm
 {
@@ -25,7 +26,7 @@ public:
   void setMask(int size, void * mask);
 };
 
-class OpenCLGaussianImage : public OpenCLImageAlgorithm
+class OpenCLGaussianImage : public OpenCL2DTo2DImageAlgorithmForStream
 {
   //TODO: Check if params is set
 public:

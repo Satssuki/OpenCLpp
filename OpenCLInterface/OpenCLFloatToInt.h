@@ -1,6 +1,6 @@
 #pragma once
 
-#include "OpenCLAlgorithm.h"
+#include "OpenCL2DTo2DImageAlgorithmForStream.h"
 
 enum class OpenCLFloatToIntMode
 {
@@ -20,7 +20,7 @@ enum class OpenCLFloatToIntMode
  * * OpenCLFloatToIntMode::UINT16 - 16 bit unsigned int
  * * OpenCLFloatToIntMode::UINT32 - 32 bit unsigned int
  */
-class OpenCLFloatToInt : public OpenCLImageAlgorithm
+class OpenCLFloatToInt : public OpenCL2DTo2DImageAlgorithmForStream
 {
 public:
   OpenCLFloatToInt(OpenCLFloatToIntMode mode = OpenCLFloatToIntMode::LUMINANCE_UINT8);

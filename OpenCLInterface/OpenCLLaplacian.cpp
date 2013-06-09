@@ -2,22 +2,22 @@
 
 #define ASSERT_OPENCL_ERR(ERR,MSG) if(ERR != CL_SUCCESS) \
 { \
-  throw OpenCLAlgorithmException(MSG, ERR); \
+  throw OpenCL2DTo2DImageException(MSG, ERR); \
 }
 
 OpenCLLaplacian::OpenCLLaplacian(void)
 {
-  input_format.image_channel_data_type = CL_FLOAT;
-  input_format.image_channel_order = CL_LUMINANCE;
+  input_image_format.image_channel_data_type = CL_FLOAT;
+  input_image_format.image_channel_order = CL_LUMINANCE;
 
-  output_format.image_channel_data_type = CL_FLOAT;
-  output_format.image_channel_order = CL_LUMINANCE;
+  output_image_format.image_channel_data_type = CL_FLOAT;
+  output_image_format.image_channel_order = CL_LUMINANCE;
 
   laplacian_format.image_channel_data_type = CL_FLOAT;
   laplacian_format.image_channel_order = CL_LUMINANCE;  
 
   kernel_name = "laplacian";
-  source_file = "convolution.cl";
+  source_filename = "convolution.cl";
   size = 3;
   size_to_pass = 1;
   
@@ -61,7 +61,7 @@ void OpenCLLaplacian::setParams(const OpenCLAlgorithmParams& params)
   }
   catch(std::bad_cast ex)
   {
-    throw OpenCLAlgorithmException("Parameters provided is not OpenCLGaussianParams");
+    throw OpenCL2DTo2DImageException("Parameters provided is not OpenCLGaussianParams");
   }
 }
 

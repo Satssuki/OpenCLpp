@@ -1,6 +1,6 @@
 #pragma once
 
-#include "OpenCLAlgorithm.h"
+#include "OpenCL2DTo2DImageAlgorithmForStream.h"
 
 /**
  * Enum for selecting conversion.
@@ -20,7 +20,7 @@ enum class OpenCLIntToFloatMode
 /**
  * Algorithm perfoming int to float conversion.
  */
-class OpenCLIntToFloat : public OpenCLImageAlgorithm
+class OpenCLIntToFloat : public OpenCL2DTo2DImageAlgorithmForStream
 {
 public:
   OpenCLIntToFloat(OpenCLIntToFloatMode mode = OpenCLIntToFloatMode::LUMINANCE_UINT_8);

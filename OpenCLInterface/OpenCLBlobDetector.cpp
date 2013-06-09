@@ -7,14 +7,14 @@
 
 OpenCLBlobDetector::OpenCLBlobDetector(void)
 {
-  input_format.image_channel_data_type = CL_FLOAT;
-  input_format.image_channel_order = CL_LUMINANCE;
+  input_image_format.image_channel_data_type = CL_FLOAT;
+  input_image_format.image_channel_order = CL_LUMINANCE;
 
-  output_format.image_channel_data_type = CL_FLOAT;
-  output_format.image_channel_order = CL_LUMINANCE;
+  output_image_format.image_channel_data_type = CL_FLOAT;
+  output_image_format.image_channel_order = CL_LUMINANCE;
 
   kernel_name = "blob_detector";
-  source_file = "detectors.cl";
+  source_filename = "detectors.cl";
 }
 
 

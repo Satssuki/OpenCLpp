@@ -1,5 +1,5 @@
 #pragma once
-#include "OpenCLAlgorithm.h"
+#include "OpenCL2DTo2DImageAlgorithmForStream.h"
 
 /** Parametes for OpenCLEdgeDetector.
  * Only paramter to set is sigma - gain to output pixel.
@@ -21,7 +21,7 @@ public:
 /** Algoritm performs Laplacian on image.
  * 
  */
-class OpenCLEdgeDetector : public OpenCLImageAlgorithm
+class OpenCLEdgeDetector : public OpenCL2DTo2DImageAlgorithmForStream
 {
 public:
   OpenCLEdgeDetector(void);

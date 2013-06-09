@@ -1,5 +1,5 @@
 #pragma once
-#include "OpenCLAlgorithm.h"
+#include "OpenCL2DTo2DImageAlgorithmForStream.h"
 
 /** Parametes for OpenCLBlobDetector.
  * Only paramter to set is sigma - gain to output pixel.
@@ -21,7 +21,7 @@ public:
 /** Algoritm performs Laplacian on image.
  * 
  */
-class OpenCLBlobDetector : public OpenCLImageAlgorithm
+class OpenCLBlobDetector : public OpenCL2DTo2DImageAlgorithmForStream
 {
 public:
   OpenCLBlobDetector(void);

@@ -92,3 +92,8 @@ cl_int OpenCLCommon::setKernelArg(int nr, const void* argument, size_t size)
 {
   return clSetKernelArg(kernel, nr, size, argument);
 }
+
+void OpenCLCommon::setParams (const OpenCLAlgorithmParams& params)
+{
+  throw OpenCLException("Algorithm is not support providing params", 0);
+}

@@ -8,26 +8,26 @@ OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
   {
   case OpenCLIntToFloatMode::LUMINANCE_UINT_8:
   case OpenCLIntToFloatMode::RGB_UINT_8:
-    input_format.image_channel_data_type = CL_UNSIGNED_INT8;
+    input_image_format.image_channel_data_type = CL_UNSIGNED_INT8;
     kernel_name = "intToFloat8bit";
     break;
   case OpenCLIntToFloatMode::LUMINANCE_UINT_10:
   case OpenCLIntToFloatMode::RGB_UINT_10:
-    input_format.image_channel_data_type = CL_UNSIGNED_INT16;
+    input_image_format.image_channel_data_type = CL_UNSIGNED_INT16;
     kernel_name = "intToFloat10bit";
     break;
   case OpenCLIntToFloatMode::LUMINANCE_UINT_12:
   case OpenCLIntToFloatMode::RGB_UINT_12:
-    input_format.image_channel_data_type = CL_UNSIGNED_INT16;
+    input_image_format.image_channel_data_type = CL_UNSIGNED_INT16;
     kernel_name = "intToFloat12bit";
     break;
   case OpenCLIntToFloatMode::LUMINANCE_UINT_16:
   case OpenCLIntToFloatMode::RGB_UINT_16:
-    input_format.image_channel_data_type = CL_UNSIGNED_INT16;
+    input_image_format.image_channel_data_type = CL_UNSIGNED_INT16;
     kernel_name = "intToFloat16bit";
     break;
   default:
-    throw OpenCLAlgorithmException("Something went very wrong, because there is no other options for OpenCLIntToFloatMode");
+    throw OpenCL2DTo2DImageException("Something went very wrong, because there is no other options for OpenCLIntToFloatMode");
   }
 
   //select data type
@@ -37,26 +37,26 @@ OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
   case OpenCLIntToFloatMode::LUMINANCE_UINT_10:
   case OpenCLIntToFloatMode::LUMINANCE_UINT_12:
   case OpenCLIntToFloatMode::LUMINANCE_UINT_16:
-    input_format.image_channel_order = CL_LUMINANCE;
-    output_format.image_channel_order = CL_LUMINANCE;
+    input_image_format.image_channel_order = CL_LUMINANCE;
+    output_image_format.image_channel_order = CL_LUMINANCE;
     break;
   case OpenCLIntToFloatMode::RGB_UINT_8:
   case OpenCLIntToFloatMode::RGB_UINT_10:
   case OpenCLIntToFloatMode::RGB_UINT_12:
   case OpenCLIntToFloatMode::RGB_UINT_16:
-    input_format.image_channel_order = CL_RGBA;
-    output_format.image_channel_order = CL_RGBA;
+    input_image_format.image_channel_order = CL_RGBA;
+    output_image_format.image_channel_order = CL_RGBA;
     break;
   default:
-    throw OpenCLAlgorithmException("Something went very wrong, because there is no other options for OpenCLIntToFloatMode and it was checked");
+    throw OpenCL2DTo2DImageException("Something went very wrong, because there is no other options for OpenCLIntToFloatMode and it was checked");
   }
 
   //common
-  input = output = NULL;
-  output_format.image_channel_data_type= CL_FLOAT;
+  //input = output = NULL;
+  output_image_format.image_channel_data_type= CL_FLOAT;
 
   //source
-  source_file = "conversions.cl";
+  source_filename = "conversions.cl";
   source = "";
   /*
   source = "const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_NONE | CLK_FILTER_NEAREST;\n"

@@ -7,21 +7,21 @@ OpenCLFloatToInt::OpenCLFloatToInt(OpenCLFloatToIntMode mode)
   {
     case OpenCLFloatToIntMode::LUMINANCE_UINT8:
     case OpenCLFloatToIntMode::RGB_UINT8:
-      output_format.image_channel_data_type= CL_UNSIGNED_INT8;
+      output_image_format.image_channel_data_type= CL_UNSIGNED_INT8;
       kernel_name = "floatToUInt8ThreeChannels";
       break;
     case OpenCLFloatToIntMode::LUMINANCE_UINT16:
     case OpenCLFloatToIntMode::RGB_UINT16:
-      output_format.image_channel_data_type= CL_UNSIGNED_INT16;
+      output_image_format.image_channel_data_type= CL_UNSIGNED_INT16;
       kernel_name = "floatToUInt16ThreeChannels";
       break;
     case OpenCLFloatToIntMode::LUMINANCE_UINT32:
     case OpenCLFloatToIntMode::RGB_UINT32:
-      output_format.image_channel_data_type= CL_UNSIGNED_INT32;
+      output_image_format.image_channel_data_type= CL_UNSIGNED_INT32;
       kernel_name = "floatToUInt32ThreeChannels";
       break;
     default:
-      throw OpenCLAlgorithmException("Something went very wrong, because there is no other options");
+      throw OpenCL2DTo2DImageException("Something went very wrong, because there is no other options");
   }
 
   switch (mode)
@@ -29,22 +29,22 @@ OpenCLFloatToInt::OpenCLFloatToInt(OpenCLFloatToIntMode mode)
   case OpenCLFloatToIntMode::LUMINANCE_UINT8:
   case OpenCLFloatToIntMode::LUMINANCE_UINT16:
   case OpenCLFloatToIntMode::LUMINANCE_UINT32:
-    input_format.image_channel_order = CL_LUMINANCE;
-    output_format.image_channel_order = CL_LUMINANCE;
+    input_image_format.image_channel_order = CL_LUMINANCE;
+    output_image_format.image_channel_order = CL_LUMINANCE;
     break;
   case OpenCLFloatToIntMode::RGB_UINT8:
   case OpenCLFloatToIntMode::RGB_UINT16:
   case OpenCLFloatToIntMode::RGB_UINT32:
-    input_format.image_channel_order = CL_RGBA;
-    output_format.image_channel_order = CL_RGBA;
+    input_image_format.image_channel_order = CL_RGBA;
+    output_image_format.image_channel_order = CL_RGBA;
     break;
   }
 
   //common  
-  input = output = NULL;
-  input_format.image_channel_data_type = CL_FLOAT;
+  //input = output = NULL;
+  input_image_format.image_channel_data_type = CL_FLOAT;
 
-  source_file = "conversions.cl";
+  source_filename = "conversions.cl";
   source = "";
     /*"const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_NONE | CLK_FILTER_NEAREST;\n"
     "__kernel void  floatToUInt8ThreeChannels(__read_only image2d_t input, __write_only image2d_t output) \n"

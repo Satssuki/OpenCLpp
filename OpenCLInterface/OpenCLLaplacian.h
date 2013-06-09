@@ -1,5 +1,6 @@
 #pragma once
-#include "OpenCLAlgorithm.h"
+
+#include "OpenCL2DTo2DImageAlgorithmForStream.h"
 
 /** Parametes for OpenCLLaplacian.
  * Only paramter to set is sigma - gain to output pixel.
@@ -21,7 +22,7 @@ public:
 /** Algoritm performs Laplacian on image.
  * 
  */
-class OpenCLLaplacian : public OpenCLImageAlgorithm
+class OpenCLLaplacian : public OpenCL2DTo2DImageAlgorithmForStream
 {
 public:
   OpenCLLaplacian(void);
