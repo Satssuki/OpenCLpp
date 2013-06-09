@@ -195,7 +195,7 @@ void OpenCLGaussianImage::setKernelArgsForStream()
   /*size_memory = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(size_to_pass), NULL, &err);
   ASSERT_OPENCL_ERR(err, "Error while creating gaussian size");*/
   
-  err = clSetKernelArg(kernel, 3, sizeof(cl_mem), (void*)&size_to_pass);
+  err = clSetKernelArg(kernel, 3, sizeof(size_to_pass), (void*)&size_to_pass);
   ASSERT_OPENCL_ERR(err, "Error while setting as arg: gaussian size");
 }
 

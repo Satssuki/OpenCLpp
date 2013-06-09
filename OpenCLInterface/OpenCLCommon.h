@@ -78,7 +78,8 @@ protected:
   /**
    * Sets kernel nr argument.
    * @param nr Argument number.
-   * @param argument Pointer to cl_mem.
+   * @param argument Pointer to argument pointer.
+   * @param size Size of argument (default is sizeof(cl_mem)).
    * @return Returns 0 in success and OpenCL error number otherwise.
    */
   cl_int setKernelArg(int nr, const void * argument, size_t size = sizeof(cl_mem));
