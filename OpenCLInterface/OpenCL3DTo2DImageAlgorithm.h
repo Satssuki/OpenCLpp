@@ -16,7 +16,7 @@ public:
 /** Class for algorithms that support reading 3D image and stores data in 2D image.
  * 
  */
-class OpenCL3DTo2DImageAlgorithm : public OpenCLImageCommon
+class OpenCL3DTo2DImageAlgorithm : public virtual OpenCLImageCommon
 {
 public:
   /** 

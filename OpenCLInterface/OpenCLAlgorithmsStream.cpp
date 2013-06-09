@@ -4,7 +4,7 @@
 
 #define ASSERT_OPENCL_ERR(ERR,MSG) if(ERR != CL_SUCCESS) \
 { \
-  throw OpenCLAlgorithmException(MSG, ERR); \
+  throw OpenCLAlgorithmsStreamException(MSG, ERR); \
 }
 
 OpenCLAlgorithmsStream::OpenCLAlgorithmsStream(void)
@@ -20,14 +20,14 @@ OpenCLAlgorithmsStream::~OpenCLAlgorithmsStream(void)
   //TODO: clear mems
 }
 
-void OpenCLAlgorithmsStream::pushAlgorithm(OpenCLImageAlgorithm * al)
+void OpenCLAlgorithmsStream::pushAlgorithm(OpenCLAlgorithmForStream * al)
 {
   if (!algorithms.empty() &&
-    (algorithms.back()->output_format.image_channel_data_type != al->input_format.image_channel_data_type ||
-    algorithms.back()->output_format.image_channel_order != al->input_format.image_channel_order)
+    (algorithms.back()->output_image_format.image_channel_data_type != al->input_image_format.image_channel_data_type ||
+    algorithms.back()->output_image_format.image_channel_order != al->input_image_format.image_channel_order)
     )//not first algorithm - need to check if data types for output of last algorithm and input of al is same
   {
-    throw OpenCLAlgorithmException("Wrong data types");
+    throw OpenCLAlgorithmsStreamException("Wrong data types");
   }
   algorithms.push_back(al);
 
@@ -59,24 +59,24 @@ void OpenCLAlgorithmsStream::prepare()
   }
 
   //create all kernels
-  std::for_each(algorithms.begin(), algorithms.end(), [this](OpenCLImageAlgorithm* al)
+  std::for_each(algorithms.begin(), algorithms.end(), [this](OpenCLAlgorithmForStream* al)
   {
     al->setDevice(device);
-    al->prepareForStream(command_queue, context);
+    al->prepareForStream(/*command_queue, context*/);
   });
 
   //creates input and outputs
   cl_int err;
 
   //input
-  input = clCreateImage2D(context, CL_MEM_READ_ONLY, &algorithms.front()->input_format, width, height, 0, NULL, &err);
+  input = clCreateImage2D(context, CL_MEM_READ_ONLY, &algorithms.front()->input_image_format, width, height, 0, NULL, &err);
   ASSERT_OPENCL_ERR(err, "Error while creating image2D for input");
   
   err = clSetKernelArg(algorithms.front()->kernel, 0, sizeof(cl_mem), (void*) &input);
   ASSERT_OPENCL_ERR(err, "Cant set kernel arg 0 of first algorithm");
   
   //output
-  output = clCreateImage2D(context, CL_MEM_WRITE_ONLY, &algorithms.back()->output_format, width, height, 0, NULL, &err);
+  output = clCreateImage2D(context, CL_MEM_WRITE_ONLY, &algorithms.back()->output_image_format, width, height, 0, NULL, &err);
   ASSERT_OPENCL_ERR(err, "Error while creating image2D for output");
   
   err = clSetKernelArg(algorithms.back()->kernel, 1, sizeof(cl_mem), (void*) &output);
@@ -87,7 +87,7 @@ void OpenCLAlgorithmsStream::prepare()
   auto next = ++algorithms.begin();
   for (auto al = algorithms.begin(); al != end; ++al, ++next)
   {
-    cl_mem mem_tmp = clCreateImage2D(context, CL_MEM_READ_WRITE, &(*al)->output_format, width, height, 0, NULL, &err);
+    cl_mem mem_tmp = clCreateImage2D(context, CL_MEM_READ_WRITE, &(*al)->output_image_format, width, height, 0, NULL, &err);
     ASSERT_OPENCL_ERR(err, "Error while creating image2D for input/output");
 
     //set kernel arg for this algorithm
@@ -122,10 +122,10 @@ void OpenCLAlgorithmsStream::processImage(const void * data_input, void * data_o
   err = clEnqueueWriteImage(command_queue, input, CL_FALSE, origin, region, 0, 0, data_input, 0, NULL, NULL);
   ASSERT_OPENCL_ERR(err, "Cant set equeue write input image");
 
-  std::for_each(algorithms.begin(), algorithms.end(), [&global_work_size, this](OpenCLImageAlgorithm *al)
+  std::for_each(algorithms.begin(), algorithms.end(), [&global_work_size, this](OpenCLAlgorithmForStream *al)
   {
     al->runStream(global_work_size);
-    time += al->getTimeConsumed();
+    time += al->getTime();
   });
 
   err = clEnqueueReadImage(command_queue, output, CL_TRUE, origin, region, 0, 0, data_output, 0, NULL, NULL);
@@ -141,7 +141,7 @@ void OpenCLAlgorithmsStream::setDevice(OpenCLDevice & d)
     context = device.getContext();
     return;
   }
-  throw OpenCLAlgorithmException("Invalid Device");
+  throw OpenCLAlgorithmsStreamException("Invalid Device");
 }
 
 double OpenCLAlgorithmsStream::getTime()

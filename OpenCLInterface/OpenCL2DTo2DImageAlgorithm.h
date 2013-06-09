@@ -14,7 +14,7 @@ public:
   }
 };
 
-class OpenCL2DTo2DImageAlgorithm : public OpenCLImageCommon
+class OpenCL2DTo2DImageAlgorithm : public virtual OpenCLImageCommon
 {
 public:
   /** 

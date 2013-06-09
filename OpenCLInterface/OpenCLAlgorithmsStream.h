@@ -1,6 +1,9 @@
 #pragma once
 
-#include "OpenCLAlgorithm.h"
+//#include "OpenCLAlgorithm.h"
+#include "OpenCLAlgorithmForStream.h"
+#include "OpenCLException.h"
+#include "OpenCLDevice.h"
 
 #include <list>
 
@@ -29,7 +32,7 @@ public:
    * Add algorithm to stream on last position. Throws OpenCLAlgorithmsStreamException if input is differ from output of last algorithm on list.
    * @param al Algorithm to add.
    */
-  void pushAlgorithm(OpenCLImageAlgorithm * al);
+  void pushAlgorithm(OpenCLAlgorithmForStream * al);
   /**
    * Removes all algorithms from stream.
    */
@@ -66,7 +69,7 @@ private:
   OpenCLDevice device;
   double time;
 
-  std::list<OpenCLImageAlgorithm*> algorithms;
+  std::list<OpenCLAlgorithmForStream*> algorithms;
   size_t width, height;
   cl_mem input, output;
   std::list<cl_mem> mems;

@@ -75,6 +75,9 @@
     <ClInclude Include="OpenCL2DTo2DImageAlgorithm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OpenCLAlgorithmForStream.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenCLAlgorithm.cpp">
@@ -135,6 +138,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OpenCL2DTo2DImageAlgorithm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCLAlgorithmForStream.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

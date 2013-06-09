@@ -112,6 +112,7 @@
     <ClInclude Include="OpenCl3DImageAlgorithm.h" />
     <ClInclude Include="OpenCL3DTo2DImageAlgorithm.h" />
     <ClInclude Include="OpenCLAlgorithm.h" />
+    <ClInclude Include="OpenCLAlgorithmForStream.h" />
     <ClInclude Include="OpenCLAlgorithmsStream.h" />
     <ClInclude Include="OpenCLBayerFilter.h" />
     <ClInclude Include="OpenCLBlobDetector.h" />
@@ -134,6 +135,7 @@
     <ClCompile Include="OpenCl3DImageAlgorithm.cpp" />
     <ClCompile Include="OpenCL3DTo2DImageAlgorithm.cpp" />
     <ClCompile Include="OpenCLAlgorithm.cpp" />
+    <ClCompile Include="OpenCLAlgorithmForStream.cpp" />
     <ClCompile Include="OpenCLAlgorithmsStream.cpp" />
     <ClCompile Include="OpenCLBayerFilter.cpp" />
     <ClCompile Include="OpenCLBlobDetector.cpp" />
