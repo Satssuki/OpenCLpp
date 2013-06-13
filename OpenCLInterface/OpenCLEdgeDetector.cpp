@@ -45,7 +45,7 @@ void OpenCLEdgeDetector::setKernelArgsForStream()
 {
   cl_int err;
 
-  additional_output_image_memory = clCreateImage2D(context, CL_MEM_READ_ONLY, &output_image_format, width, height, 0, NULL, &err);
+  additional_output_image_memory = clCreateImage2D(context, CL_MEM_WRITE_ONLY, &output_image_format, width, height, 0, NULL, &err);
   ASSERT_OPENCL_ERR(err, "Can't create additional image for OpenCLEdgeDetector");
 
   err = setKernelArg(2, &additional_output_image_memory);

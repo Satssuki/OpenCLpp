@@ -62,7 +62,9 @@ void OpenCLCommon::enqueueNDRangeKernelWithTimeMeasurment(cl_uint work_dim, size
   int err = clEnqueueNDRangeKernel(command_queue, kernel, work_dim, global_work_offset, global_work_size, local_work_size, num_events_in_wait_list, NULL, &event);
   if (err)
   {
-    throw OpenCLException("Cant enqueue nd range kernel", err);
+    std::string error = "Cant enqueue nd range kernel " + kernel_name + " in source " + source_filename;
+    
+    throw OpenCLException(error.c_str(), err);
   }
   clWaitForEvents(1, &event);
 

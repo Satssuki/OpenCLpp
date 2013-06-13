@@ -4,7 +4,7 @@
 OpenCLFindEdgesIn3DImage::OpenCLFindEdgesIn3DImage(void)
 {
   source_filename = "max.cl";
-  kernel_name = "findLocalMax";
+  kernel_name = "edge_max";
 
   input_image_format.image_channel_data_type = CL_FLOAT;
   input_image_format.image_channel_order = CL_LUMINANCE;
@@ -21,10 +21,10 @@ OpenCLFindEdgesIn3DImage::~OpenCLFindEdgesIn3DImage(void)
 void OpenCLFindEdgesIn3DImage::setOtherArguments()
 {
   cl_int err;
-  clCreateImage3D(context, CL_MEM_READ_ONLY, &input_image_format, width, height, depth, 0, 0, NULL, &err);
+  Lvvv_memory = clCreateImage3D(context, CL_MEM_READ_ONLY, &input_image_format, width, height, depth, 0, 0, NULL, &err);
   if (err)
   {
-    throw OpenCL3DTo2DImageException("Error while enqueue write zero image", err);
+    throw OpenCL3DTo2DImageException("Error while create image 3d for Lvvv in edge find max", err);
   }
 
   //set zeros for output image
@@ -39,13 +39,10 @@ void OpenCLFindEdgesIn3DImage::setOtherArguments()
     throw OpenCL3DTo2DImageException("Error while enqueue write zero image", err);
   }
   
-  size_t origin2[] = {0, 0, 0};
-  size_t region2[] = {width, height, depth};
-
-  err = clEnqueueWriteImage(command_queue, Lvvv_memory, CL_FALSE, origin2, region2, 0, 0, Lvvv_image_data, 0, NULL, NULL);
+  err = setKernelArg(2, &Lvvv_memory);
   if (err)
   {
-    throw OpenCL3DTo2DImageException("Error while enqueue write zero image", err);
+    throw OpenCL3DTo2DImageException("Can't set kernel arg Lvv for edge max", err);
   }
 }
 
@@ -68,5 +65,12 @@ void OpenCLFindEdgesIn3DImage::setParams(const OpenCLFindEdgesIn3DImageParams & 
 
 void OpenCLFindEdgesIn3DImage::setKernelArguments()
 {
-  setKernelArg(2, Lvvv_memory);
+  size_t origin2[] = {0, 0, 0};
+  size_t region2[] = {width, height, depth};
+
+  cl_int err = clEnqueueWriteImage(command_queue, Lvvv_memory, CL_FALSE, origin2, region2, 0, 0, Lvvv_image_data, 0, NULL, NULL);
+  if (err)
+  {
+    throw OpenCL3DTo2DImageException("Error while enqueue write Lvvv image in edge find max", err);
+  }
 }

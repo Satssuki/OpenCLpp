@@ -51,28 +51,7 @@ __kernel void  edge_detector(__read_only image2d_t input, __write_only image2d_t
 	float Lvv = Lx * Lx * Lxx + 2.0 * Lx * Ly * Lxy + Ly * Ly * Lyy;
 	float Lvvv = (Lx * Lx * Lx * Lxxx + 3.0 * Lx * Lx * Ly * Lxxy + 3.0 * Lx * Ly * Ly * Lxyy + Ly * Ly * Ly * Lyyy);
 	write_imagef(out_Lvv, (int2)(i, j), Lvv);
-	write_imagef(out_Lvv, (int2)(i, j), Lvvv);
-
-	/*if (Lvv.x <= 0.0001)
-	{
-		write_imagef(output, (int2)(i, j), 1.0);
-	}
-	else
-	{
-		write_imagef(output, (int2)(i, j), 0.0);
-	}//*/
-	
-/*	if (Lvvv.x < 0.0 && Lvv.x <= 0.1)
-	{
-		write_imagef(output, (int2)(i, j), 1.0);
-	}
-	else
-	{
-		write_imagef(output, (int2)(i, j), 0.0);
-	}//*/
-	
-	//write_imagef(output, (int2)(i, j), fabs(2.0 * Lx * Ly * Lxy));
-	
+	write_imagef(out_Lvvv, (int2)(i, j), Lvvv);
 }
 
 __kernel void  corner_detector(__read_only image2d_t input, __write_only image2d_t output)
