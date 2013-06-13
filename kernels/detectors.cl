@@ -1,6 +1,6 @@
 const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_MIRRORED_REPEAT | CLK_FILTER_NEAREST;
 
-__kernel void  edge_detector(__read_only image2d_t input, __write_only image2d_t Lvv, __write_only image2d_t Lvvv)
+__kernel void  edge_detector(__read_only image2d_t input, __write_only image2d_t out_Lvv, __write_only image2d_t out_Lvvv)
 {
 	int i = get_global_id(0); //column number
 	int j = get_global_id(1); //row number

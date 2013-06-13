@@ -43,5 +43,10 @@ protected:
 
 private:
   cl_mem additional_output_image_memory;
+
+  void * output;
+  size_t output_size;
+
+  void clearOutput();
 };
 

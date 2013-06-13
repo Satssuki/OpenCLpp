@@ -61,6 +61,8 @@ void OpenCLAlgorithmsStream::prepare()
   //create all kernels
   std::for_each(algorithms.begin(), algorithms.end(), [this](OpenCLAlgorithmForStream* al)
   {
+    al->width = width;
+    al->height = height;
     al->setDevice(device);
     al->prepareForStream(/*command_queue, context*/);
   });
@@ -136,7 +138,7 @@ void OpenCLAlgorithmsStream::processImage(const void * data_input, void * data_o
   err = clEnqueueReadImage(command_queue, output, CL_TRUE, origin, region, 0, 0, data_output, 0, NULL, NULL);
   ASSERT_OPENCL_ERR(err, "Cant enqueue read buffer")
 
-    (*algorithms.end())->obtainAdditionalOutput();
+   (*(--algorithms.end()))->obtainAdditionalOutput();
 }
 
 void OpenCLAlgorithmsStream::setDevice(OpenCLDevice & d)
@@ -158,6 +160,5 @@ double OpenCLAlgorithmsStream::getTime()
 
 void * OpenCLAlgorithmsStream::getLastAlgorithmAdditionalOutput() const
 {
-  return (*algorithms.end())->additionalOutput();
-  
+  return (*(--algorithms.end()))->additionalOutput();
 }

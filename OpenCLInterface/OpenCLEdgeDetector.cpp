@@ -18,11 +18,14 @@ OpenCLEdgeDetector::OpenCLEdgeDetector(void)
   source_filename = "detectors.cl";
 
   additional_output_image_memory = nullptr;
+  output_size = 0;
+  output = nullptr;
 }
 
 
 OpenCLEdgeDetector::~OpenCLEdgeDetector(void)
 {
+  clearOutput();
 }
 
 void OpenCLEdgeDetector::releaseMem()
@@ -42,7 +45,7 @@ void OpenCLEdgeDetector::setKernelArgsForStream()
 {
   cl_int err;
 
-  clCreateImage2D(context, CL_MEM_READ_ONLY, &output_image_format, width, height, 0, NULL, &err);
+  additional_output_image_memory = clCreateImage2D(context, CL_MEM_READ_ONLY, &output_image_format, width, height, 0, NULL, &err);
   ASSERT_OPENCL_ERR(err, "Can't create additional image for OpenCLEdgeDetector");
 
   err = setKernelArg(2, &additional_output_image_memory);
@@ -51,10 +54,22 @@ void OpenCLEdgeDetector::setKernelArgsForStream()
 
 void OpenCLEdgeDetector::obtainAdditionalOutput()
 {
-  size_t additional_output_image_size = width * height * sizeof(float);
+  clearOutput();
+  output = new float[width * height];
+
   size_t origin[] = {0, 0, 0};
-  size_t region[] = {height, width, 0};
+  size_t region[] = {width, height, 1};
   
-  cl_int err = clEnqueueReadImage(command_queue, additional_output_image_memory, CL_TRUE, origin, region, 0, 0, &additional_output_image_size, 0, NULL, NULL);
+  cl_int err = clEnqueueReadImage(command_queue, additional_output_image_memory, CL_TRUE, origin, region, 0, 0, output, 0, NULL, NULL);
   ASSERT_OPENCL_ERR(err, "Can't read aditional image for OpenCLEdgeDetector");
+}
+
+
+void OpenCLEdgeDetector::clearOutput()
+{
+  if (output)
+  {
+    delete [] output;
+    output = nullptr;
+  }
 }
