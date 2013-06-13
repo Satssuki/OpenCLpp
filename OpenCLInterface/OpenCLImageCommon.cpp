@@ -24,6 +24,8 @@ void OpenCLImageCommon::processData(const void* data_input, void* data_output)
     throw OpenCLAlgorithmException("Algorithm is not preapred");
   }
 
+  setKernelArguments();
+
   cl_int err;
   time = 0;
 
@@ -56,4 +58,10 @@ void OpenCLImageCommon::clearAlgorithm()
   {
     clReleaseMemObject(output_image_memory);
   }
+}
+
+
+void OpenCLImageCommon::setKernelArguments()
+{
+
 }

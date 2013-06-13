@@ -123,6 +123,7 @@
     <ClInclude Include="OpenCLDevice.h" />
     <ClInclude Include="OpenCLEdgeDetector.h" />
     <ClInclude Include="OpenCLException.h" />
+    <ClInclude Include="OpenCLFindEdgesIn3DImage.h" />
     <ClInclude Include="OpenCLFindMaxin3DImage.h" />
     <ClInclude Include="OpenCLFloatToInt.h" />
     <ClInclude Include="OpenCLGaussian.h" />
@@ -148,6 +149,7 @@
     <ClCompile Include="OpenCLDevice.cpp" />
     <ClCompile Include="OpenCLEdgeDetector.cpp" />
     <ClCompile Include="OpenCLException.cpp" />
+    <ClCompile Include="OpenCLFindEdgesIn3DImage.cpp" />
     <ClCompile Include="OpenCLFindMaxin3DImage.cpp" />
     <ClCompile Include="OpenCLFloatToInt.cpp" />
     <ClCompile Include="OpenCLGaussian.cpp" />
@@ -159,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -16,6 +16,8 @@ public:
   void processData(const void * data_input, void * data_output);
   
 protected:
+
+  virtual void setKernelArguments();
   
   /**
    * Clears algorithm.

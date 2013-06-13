@@ -20,6 +20,7 @@ OpenCLFindMaxin3DImage::~OpenCLFindMaxin3DImage(void)
 
 void OpenCLFindMaxin3DImage::setOtherArguments()
 {
+  //set zeros for output image
   char *zero_memory = new char[height * width];
   memset(zero_memory, 0, height * width);
   size_t origin[] = {0, 0, 0};

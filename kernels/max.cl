@@ -31,3 +31,48 @@ __kernel void findLocalMax(__read_only image3d_t input, __write_only image2d_t o
 		write_imageui(output, (int2)(i, j), k);
 	}
 }
+
+__kernel void  edge_max(__read_only image3d_t input Lvv_image, __read_only image2d_t o	utput, __read_only image3d_t input Lvv_image)
+{
+	int i = get_global_id(0); //column number
+	int j = get_global_id(1); //row number
+	int k = get_global_id(2); //depth number
+
+	float ul = read_imagef(Lvv_image, sampler, (int2)(i - 1, j - 1, k, 0)).x;
+	float u = read_imagef(Lvv_image, sampler, (int2)(i, j - 1, k, 0)).x;
+	float ur = read_imagef(Lvv_image, sampler, (int2)(i + 1, j - 1, k, 0)).x;
+	float l = read_imagef(Lvv_image, sampler, (int2)(i - 1, j, k, 0)).x;
+	float c = read_imagef(Lvv_image, sampler, (int2)(i, j, k, 0)).x;
+	float r = read_imagef(Lvv_image, sampler, (int2)(i + 1, j, k, 0)).x;
+	float dl = read_imagef(Lvv_image, sampler, (int2)(i - 1, j + 1, k, 0)).x;
+	float d = read_imagef(Lvv_image, sampler, (int2)(i, j + 1, k, 0)).x;
+	float dr = read_imagef(Lvv_image, sampler, (int2)(i + 1, j + 1, k, 0)).x;
+	
+	float Lvvv = read_imagef(Lvvv_image, sampler, (int2)(i - 1, j - 1, k, 0)).x;
+	if (
+		(c * r <= 0 
+		|| c * ur <0
+		|| c * dr <0
+		|| c * l <0
+		|| c * dl <0
+		|| c * ul <0
+		|| c * u <0
+		|| c * d <0)
+		&& Lvvv < 0
+		)
+	{
+		write_imagef(output, (int2)(i, j), 255);
+	}
+	
+/*	if (Lvvv.x < 0.0 && Lvv.x <= 0.1)
+	{
+		write_imagef(output, (int2)(i, j), 1.0);
+	}
+	else
+	{
+		write_imagef(output, (int2)(i, j), 0.0);
+	}//*/
+	
+	//write_imagef(output, (int2)(i, j), fabs(2.0 * Lx * Ly * Lxy));
+	
+}
