@@ -65,10 +65,17 @@ public:
    * @return Time in ms.
    */
   double getTime();
+
+  /**
+   * Returns additional output data from last algorithm.
+   * @return Returs void * with data if last algorithm provide additional output, nullptr otherwise.
+   */
+  void* getLastAlgorithmAdditionalOutput() const;
   
 private:
   OpenCLDevice device;
   double time;
+
 
   std::list<OpenCLAlgorithmForStream*> algorithms;
   size_t width, height;

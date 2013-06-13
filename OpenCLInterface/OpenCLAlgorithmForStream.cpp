@@ -26,3 +26,8 @@ void OpenCLAlgorithmForStream::runStream(const size_t * global_work_size)
   copyDataToGPUStream();
   enqueueNDRangeKernelWithTimeMeasurment(2, NULL, global_work_size, NULL, 0);
 }
+
+void * OpenCLAlgorithmForStream::additionalOutput() const
+{
+  return nullptr;
+}

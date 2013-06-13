@@ -1,6 +1,6 @@
 const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_MIRRORED_REPEAT | CLK_FILTER_NEAREST;
 
-__kernel void  edge_detector(__read_only image2d_t input, __write_only image2d_t output)
+__kernel void  edge_detector(__read_only image2d_t input, __write_only image2d_t Lvv, __write_only image2d_t Lvvv)
 {
 	int i = get_global_id(0); //column number
 	int j = get_global_id(1); //row number
@@ -48,13 +48,12 @@ __kernel void  edge_detector(__read_only image2d_t input, __write_only image2d_t
 					+ dl / 8.0 - dr / 8.0;
 	float Lyyy =  0.5 * (ul + ur - dr - dl) + u - d;
 	
-	float4 Lvv = (0.0, 0.0, 0.0, 0.0);
-	Lvv.x = fabs(Lx * Lx * Lxx + 2.0 * Lx * Ly * Lxy + Ly * Ly * Lyy);
-	float4 Lvvv = (0.0, 0.0, 0.0, 0.0);
-	Lvvv.x = (Lx * Lx * Lx * Lxxx + 3.0 * Lx * Lx * Ly * Lxxy + 3.0 * Lx * Ly * Ly * Lxyy + Ly * Ly * Ly * Lyyy);
-	//write_imagef(output, (int2)(i, j), Lvv);
+	float Lvv = Lx * Lx * Lxx + 2.0 * Lx * Ly * Lxy + Ly * Ly * Lyy;
+	float Lvvv = (Lx * Lx * Lx * Lxxx + 3.0 * Lx * Lx * Ly * Lxxy + 3.0 * Lx * Ly * Ly * Lxyy + Ly * Ly * Ly * Lyyy);
+	write_imagef(out_Lvv, (int2)(i, j), Lvv);
+	write_imagef(out_Lvv, (int2)(i, j), Lvvv);
 
-	if (Lvv.x <= 0.0001)
+	/*if (Lvv.x <= 0.0001)
 	{
 		write_imagef(output, (int2)(i, j), 1.0);
 	}

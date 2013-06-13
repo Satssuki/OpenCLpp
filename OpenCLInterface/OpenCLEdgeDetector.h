@@ -28,10 +28,11 @@ public:
   ~OpenCLEdgeDetector(void);
 
   //from OpenCLAlgorithm
-  void setParams(const OpenCLAlgorithmParams & params);
+  //void setParams(const OpenCLAlgorithmParams & params);
   //void setParams(const OpenCLEdgeDetectorParams & params);
-  void run(const unsigned char * data_input, size_t di_size, unsigned char * data_output, size_t do_size);
-  void setKernelArgs(size_t di_size, size_t do_size);
+  //void run(const unsigned char * data_input, size_t di_size, unsigned char * data_output, size_t do_size);
+  //void setKernelArgs(size_t di_size, size_t do_size);
+  void obtainAdditionalOutput();
   
   void releaseMem();
 
@@ -41,6 +42,6 @@ protected:
   void setKernelArgsForStream();
 
 private:
-  //private stuff
+  cl_mem additional_output_image_memory;
 };
 
