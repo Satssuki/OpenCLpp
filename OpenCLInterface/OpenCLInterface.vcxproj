@@ -132,6 +132,7 @@
     <ClInclude Include="OpenCLIntToFloat.h" />
     <ClInclude Include="OpenCLInvertImage.h" />
     <ClInclude Include="OpenCLLaplacian.h" />
+    <ClInclude Include="OpenCLRGBToGray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenCL2DTo2DImageAlgorithm.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="OpenCLIntToFloat.cpp" />
     <ClCompile Include="OpenCLInvertImage.cpp" />
     <ClCompile Include="OpenCLLaplacian.cpp" />
+    <ClCompile Include="OpenCLRGBToGray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

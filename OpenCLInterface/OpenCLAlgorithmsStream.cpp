@@ -27,7 +27,7 @@ void OpenCLAlgorithmsStream::pushAlgorithm(OpenCLAlgorithmForStream * al)
     algorithms.back()->output_image_format.image_channel_order != al->input_image_format.image_channel_order)
     )//not first algorithm - need to check if data types for output of last algorithm and input of al is same
   {
-    throw OpenCLAlgorithmsStreamException("Wrong data types");
+    throw OpenCLAlgorithmsStreamException("Output from last algorithm (" + algorithms.back()->kernel_name + ") is not compatible with new algoriothm (" + al->kernel_name + ")");
   }
   algorithms.push_back(al);
 

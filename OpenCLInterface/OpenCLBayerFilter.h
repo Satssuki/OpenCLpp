@@ -133,5 +133,30 @@ private:
 #endif
 };
 
+class OpenCLBayerFilterForStream : public OpenCL2DTo2DImageAlgorithmForStream
+{
+public:
+  OpenCLBayerFilterForStream(BayerFilterMask mask_type = BayerFilterMask::SQUARE);
+  
+  virtual void setParams(const OpenCLAlgorithmParams& params);
+  void setParams(const OpenCLBayerFilterParams& params);
 
+  void copyDataToGPUStream();
+  void setKernelArgsForStream();
+  
+private:
+  //work size
+  size_t global_work_size[2];
+  
+  //kernel params
+  static const unsigned int kernel_params_size = 4;
+  cl_uchar kernel_params[kernel_params_size];
+
+  //cl_mems
+  cl_mem kparams, mem_balance;
+
+  //color balance
+  float balance[3];
+  OpenCLBayerFilterParams params;
+};
 #endif // OPENCLBAYERFILTER_H
