@@ -17,6 +17,7 @@
 #define BFIOCL_MODE_GRB 0x18
 
 #include "OpenCLAlgorithm.h"
+#include "OpenCL2DTo2DImageAlgorithmForStream.h"
 
 enum class BayerFilterMask
 {
@@ -114,7 +115,7 @@ private:
   void copyDataToGPU(const unsigned char* data_input, size_t di_size);
 };
 
-class OpenCLBayerFilterImage : virtual public OpenCLBayerFilter, public OpenCLImageAlgorithm
+class OpenCLBayerFilterImage : virtual public OpenCLBayerFilter, virtual public OpenCLImageAlgorithm//, public OpenCL2DTo2DImageAlgorithmForStream
 {
 public:
   OpenCLBayerFilterImage(BayerFilterMask mask_type = BayerFilterMask::SQUARE);

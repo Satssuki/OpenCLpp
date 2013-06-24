@@ -82,6 +82,8 @@ public:
    */
   bool isValid() const;
   const OpenCLDevice & operator=(const OpenCLDevice &);
+
+  void getDeviceInfo(cl_device_info cdi, void * return_val);
   
   
 protected:  

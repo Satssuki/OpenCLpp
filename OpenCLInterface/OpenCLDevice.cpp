@@ -209,3 +209,12 @@ void OpenCLDevice::clean()
   command_queue = NULL;
   context = NULL;
 }
+
+void OpenCLDevice::getDeviceInfo(cl_device_info cdi, void * return_val)
+{
+  cl_int err = clGetDeviceInfo(device_id, cdi, 4, return_val, NULL); //TODO: imporove
+  if (err != 0)
+  {
+    throw OpenCLDeviceException("Can't get Device info for" + device_name, err);
+  }
+}

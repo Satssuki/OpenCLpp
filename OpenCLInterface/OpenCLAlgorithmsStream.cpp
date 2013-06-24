@@ -146,8 +146,8 @@ void OpenCLAlgorithmsStream::setDevice(OpenCLDevice & d)
   if (d.isValid())
   {
     device = d;
-    command_queue = device.getCommandQueue();
     context = device.getContext();
+    command_queue = device.getCommandQueue();
     return;
   }
   throw OpenCLAlgorithmsStreamException("Invalid Device");
