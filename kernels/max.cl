@@ -26,7 +26,7 @@ __kernel void findLocalMax(__read_only image3d_t input, __write_only image2d_t o
 	}
 	
 	
-	if (sum.x > 1)
+	if (sum.x > 0.51) //TODO: think about it (scale selection)
 	{
 		write_imageui(output, (int2)(i, j), k);
 	}
