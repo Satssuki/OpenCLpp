@@ -41,6 +41,8 @@ protected:
   void copyDataToGPUStream();
   void setKernelArgsForStream();
 
+  void *additionalOutput() const;
+
 private:
   cl_mem additional_output_image_memory;
 

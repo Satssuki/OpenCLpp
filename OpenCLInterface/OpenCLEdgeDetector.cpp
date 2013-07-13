@@ -73,3 +73,9 @@ void OpenCLEdgeDetector::clearOutput()
     output = nullptr;
   }
 }
+
+void * OpenCLEdgeDetector::additionalOutput() const
+{
+  return output;
+}
+
