@@ -6,10 +6,10 @@ __kernel void findLocalMax(__read_only image3d_t input, __write_only image2d_t o
 	int i = get_global_id(0); //column number
 	int j = get_global_id(1); //row number
 	int k = get_global_id(2); //depth number
-	if (k == get_global_size(2))
-	{
-		return;
-	}
+	//if (k == get_global_size(2))
+	//{
+//		return;
+//	}
 	float4 sum = read_imagef(input, sampler, (int4)(i, j, k, 0));
 	for (int ii = -1; ii < 2; ++ii)
 	{
@@ -26,9 +26,9 @@ __kernel void findLocalMax(__read_only image3d_t input, __write_only image2d_t o
 	}
 	
 	
-	if (sum.x > 0.51) //TODO: think about it (scale selection)
+	if (sum.x > 1e-5) //TODO: think about it (scale selection)
 	{
-		write_imageui(output, (int2)(i, j), k);
+		write_imageui(output, (int2)(i, j), k+1);
 	}
 }
 
