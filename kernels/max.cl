@@ -1,4 +1,4 @@
-const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_MIRRORED_REPEAT | CLK_FILTER_NEAREST;
+const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP | CLK_FILTER_NEAREST;
 
 
 __kernel void findLocalMax(__read_only image3d_t input, __write_only image2d_t output)
@@ -17,7 +17,7 @@ __kernel void findLocalMax(__read_only image3d_t input, __write_only image2d_t o
 		{
 			for (int kk = -1; kk < 2; ++kk)
 			{
-				if (read_imagef(input, sampler, (int4)(i + ii, j + jj, k + kk, 0)).x > sum.x)
+				if ((jj != 0 || kk != 0 || ii != 0) && read_imagef(input, sampler, (int4)(i + ii, j + jj, k + kk, 0)).x >= sum.x)
 				{
 					return;
 				}
