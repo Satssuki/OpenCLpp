@@ -109,15 +109,6 @@ __kernel void  corner_detector(__read_only image2d_t input, __write_only image2d
 	float4 k = (0.0, 0.0, 0.0, 0.0);
 	k.x = fabs(Lx * Lx * Lyy + Ly * Ly * Lxx - 2.0 * Lx * Ly * Lxy);
 	write_imagef(output, (int2)(i,j), k.x);
-	
-/*	if (k.x > 0.1)
-	{
-		write_imagef(output, (int2)(i, j), 1.0);
-	}
-	else
-	{
-		write_imagef(output, (int2)(i, j), 0.0);
-	}*/
 }
 
 __kernel void  blob_detector(__read_only image2d_t input, __write_only image2d_t output)

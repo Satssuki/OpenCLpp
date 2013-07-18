@@ -95,5 +95,4 @@ __kernel void  laplacian(__read_only image2d_t input, __write_only image2d_t out
   
   write_imagef(output, (int2)(i,j), sum);
   
-
 }
