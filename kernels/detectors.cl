@@ -20,7 +20,9 @@ __kernel void  edge_detector(__read_only image2d_t input, __write_only image2d_t
 	float Lxx =  ul / 12.0 - u / 6.0 + ur / 12.0 +
                 5.0 * l / 6.0 - 5.0 * c / 3.0 + 5.0 * r / 6.0 +
 				dl / 12.0 - d / 6.0 + dr / 12.0;//*/
-	float Lxy =  ul / 6.0 + 2.0 * u / 3.0 + ur / 6.0 +
+	float Lxy =  ul / 4.0 - ur / 4.0 +
+				-dl / 4.0 + dr / 4.0;//*/		
+	/*float Lxy =  ul / 6.0 + 2.0 * u / 3.0 + ur / 6.0 +
                 2.0 * l / 3.0 - 10.0 * c / 3.0 + 2.0 * r / 3.0 +
 				dl / 6.0 + 2.0 * d / 3.0 + dr / 6.0;//*/
 	float Lyy =  ul / 12.0 + 5.0 * u / 6.0 + ur / 12.0 -
@@ -106,9 +108,8 @@ __kernel void  corner_detector(__read_only image2d_t input, __write_only image2d
 					+ dl / 8.0 - dr / 8.0;
 	float Lyyy =  0.5 * (d - u);
 	
-	float4 k = (0.0, 0.0, 0.0, 0.0);
-	k.x = fabs(Lx * Lx * Lyy + Ly * Ly * Lxx - 2.0 * Lx * Ly * Lxy);
-	write_imagef(output, (int2)(i,j), k.x);
+	float k = fabs(Lx * Lx * Lyy + Ly * Ly * Lxx - 2.0 * Lx * Ly * Lxy);
+	write_imagef(output, (int2)(i,j), k);
 }
 
 __kernel void  blob_detector(__read_only image2d_t input, __write_only image2d_t output)
