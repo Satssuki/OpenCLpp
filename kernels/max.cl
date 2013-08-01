@@ -48,7 +48,7 @@ __kernel void  edge_max(__read_only image3d_t Lvv_image, __write_only image2d_t 
 	float d = read_imagef(Lvv_image, sampler, (int4)(i, j + 1, k, 0)).x;
 	float dr = read_imagef(Lvv_image, sampler, (int4)(i + 1, j + 1, k, 0)).x;
 	
-	float Lvvv = read_imagef(Lvvv_image, sampler, (int4)(i - 1, j - 1, k, 0)).x;
+	float Lvvv = read_imagef(Lvvv_image, sampler, (int4)(i - 1, j - 1, k, 0)).x; //TODO: fix
 	if (
 		(c * r < 0 
 		|| c * ur <0
@@ -75,4 +75,18 @@ __kernel void  edge_max(__read_only image3d_t Lvv_image, __write_only image2d_t 
 	
 	//write_imagef(output, (int2)(i, j), fabs(2.0 * Lx * Ly * Lxy));
 	
+}
+
+__kernel void  ridge_max(__read_only image3d_t L1_image, __write_only image2d_t output, __read_only image3d_t L2_image)
+{
+	int i = get_global_id(0); //column number
+	int j = get_global_id(1); //row number
+	int k = get_global_id(2); //depth number
+	
+	float L1 = read_imagef(L1_image, sampler, (int4)(i, j, k, 0)).x;
+	float L2 = read_imagef(L2_image, sampler, (int4)(i, j, k, 0)).x;
+	if (L1 == 0 && L2 > 0)
+	{
+		write_imageui(output, (int2)(i, j), 255);
+	}
 }

@@ -125,6 +125,7 @@
     <ClInclude Include="OpenCLException.h" />
     <ClInclude Include="OpenCLFindEdgesIn3DImage.h" />
     <ClInclude Include="OpenCLFindMaxin3DImage.h" />
+    <ClInclude Include="OpenCLFindRidgesIn3DImage.h" />
     <ClInclude Include="OpenCLFloatToInt.h" />
     <ClInclude Include="OpenCLGaussian.h" />
     <ClInclude Include="OpenCLHelpers.h" />
@@ -133,6 +134,7 @@
     <ClInclude Include="OpenCLInvertImage.h" />
     <ClInclude Include="OpenCLLaplacian.h" />
     <ClInclude Include="OpenCLRGBToGray.h" />
+    <ClInclude Include="OpenCLRidgeDetector.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenCL2DTo2DImageAlgorithm.cpp" />
@@ -152,6 +154,7 @@
     <ClCompile Include="OpenCLException.cpp" />
     <ClCompile Include="OpenCLFindEdgesIn3DImage.cpp" />
     <ClCompile Include="OpenCLFindMaxin3DImage.cpp" />
+    <ClCompile Include="OpenCLFindRidgesIn3DImage.cpp" />
     <ClCompile Include="OpenCLFloatToInt.cpp" />
     <ClCompile Include="OpenCLGaussian.cpp" />
     <ClCompile Include="OpenCLHelpers.cpp" />
@@ -160,6 +163,7 @@
     <ClCompile Include="OpenCLInvertImage.cpp" />
     <ClCompile Include="OpenCLLaplacian.cpp" />
     <ClCompile Include="OpenCLRGBToGray.cpp" />
+    <ClCompile Include="OpenCLRidgeDetector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
