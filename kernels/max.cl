@@ -26,7 +26,7 @@ __kernel void findLocalMax(__read_only image3d_t input, __write_only image2d_t o
 	}
 	
 	
-	if (sum.x > 1e-5) //TODO: think about it (scale selection)
+	if (sum.x > 1e-5) 
 	{
 		write_imageui(output, (int2)(i, j), k+1);
 	}
@@ -48,7 +48,7 @@ __kernel void  edge_max(__read_only image3d_t Lvv_image, __write_only image2d_t 
 	float d = read_imagef(Lvv_image, sampler, (int4)(i, j + 1, k, 0)).x;
 	float dr = read_imagef(Lvv_image, sampler, (int4)(i + 1, j + 1, k, 0)).x;
 	
-	float Lvvv = read_imagef(Lvvv_image, sampler, (int4)(i - 1, j - 1, k, 0)).x; //TODO: fix
+	float Lvvv = read_imagef(Lvvv_image, sampler, (int4)(i, j, k, 0)).x; //TODO: fix
 	if (
 		(c * r < 0 
 		|| c * ur <0
