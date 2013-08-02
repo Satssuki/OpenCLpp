@@ -123,8 +123,11 @@
     <ClInclude Include="OpenCLDevice.h" />
     <ClInclude Include="OpenCLEdgeDetector.h" />
     <ClInclude Include="OpenCLException.h" />
+    <ClInclude Include="OpenCLFindEdgesIn2DImage.h" />
     <ClInclude Include="OpenCLFindEdgesIn3DImage.h" />
+    <ClInclude Include="OpenCLFindMaxin2DImage.h" />
     <ClInclude Include="OpenCLFindMaxin3DImage.h" />
+    <ClInclude Include="OpenCLFindRidgesIn2DImage.h" />
     <ClInclude Include="OpenCLFindRidgesIn3DImage.h" />
     <ClInclude Include="OpenCLFloatToInt.h" />
     <ClInclude Include="OpenCLGaussian.h" />
@@ -152,8 +155,11 @@
     <ClCompile Include="OpenCLDevice.cpp" />
     <ClCompile Include="OpenCLEdgeDetector.cpp" />
     <ClCompile Include="OpenCLException.cpp" />
+    <ClCompile Include="OpenCLFindEdgesIn2DImage.cpp" />
     <ClCompile Include="OpenCLFindEdgesIn3DImage.cpp" />
+    <ClCompile Include="OpenCLFindMaxin2DImage.cpp" />
     <ClCompile Include="OpenCLFindMaxin3DImage.cpp" />
+    <ClCompile Include="OpenCLFindRidgesIn2DImage.cpp" />
     <ClCompile Include="OpenCLFindRidgesIn3DImage.cpp" />
     <ClCompile Include="OpenCLFloatToInt.cpp" />
     <ClCompile Include="OpenCLGaussian.cpp" />

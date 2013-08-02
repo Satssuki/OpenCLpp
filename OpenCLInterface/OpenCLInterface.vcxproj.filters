@@ -96,6 +96,15 @@
     <ClInclude Include="OpenCLFindRidgesIn3DImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OpenCLFindRidgesIn2DImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenCLFindMaxin2DImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenCLFindEdgesIn2DImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="OpenCLAlgorithm.cpp">
@@ -177,6 +186,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OpenCLFindRidgesIn3DImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCLFindRidgesIn2DImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCLFindMaxin2DImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenCLFindEdgesIn2DImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
