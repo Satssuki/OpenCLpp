@@ -9,7 +9,8 @@
 
 OpenCL2DTo2DImageAlgorithm::OpenCL2DTo2DImageAlgorithm(void) : OpenCLImageCommon()
 {
-  width = height = depth = 0;
+  width = height = 0;
+  depth = 1;
 }
 
 
@@ -17,7 +18,7 @@ OpenCL2DTo2DImageAlgorithm::~OpenCL2DTo2DImageAlgorithm(void)
 {
 }
 
-void OpenCL2DTo2DImageAlgorithm::setDataSize(size_t w, size_t h)
+void OpenCL2DTo2DImageAlgorithm::setDataSize(size_t w, size_t h, size_t d)
 {
   width = w;
   height = h;

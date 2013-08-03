@@ -3,7 +3,7 @@
 
 OpenCLFindMaxin2DImage::OpenCLFindMaxin2DImage(void)
 {
-  source_filename = "max.cl";
+  source_filename = "max2d.cl";
   kernel_name = "findLocalMax";
 
   input_image_format.image_channel_data_type = CL_FLOAT;

@@ -16,13 +16,6 @@ OpenCL3DTo2DImageAlgorithm::~OpenCL3DTo2DImageAlgorithm(void)
 {
 }
 
-void OpenCL3DTo2DImageAlgorithm::setDataSize(size_t w, size_t h, size_t d)
-{
-  width = w;
-  height = h;
-  depth = d;
-}
-
 void OpenCL3DTo2DImageAlgorithm::setIOArguments()
 {
   cl_int err;

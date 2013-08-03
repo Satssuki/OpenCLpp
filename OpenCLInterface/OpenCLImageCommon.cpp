@@ -65,3 +65,11 @@ void OpenCLImageCommon::setKernelArguments()
 {
 
 }
+
+
+void OpenCLImageCommon::setDataSize(size_t w, size_t h, size_t d)
+{
+  width = w;
+  height = h;
+  depth = d;
+}

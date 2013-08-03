@@ -31,8 +31,15 @@ public:
    * Set 2D and 2D image size. For 2D images only width and height is relevatnt.
    * @param w Image width.
    * @param h Image height.
+   *
+  void setDataSize(size_t w, size_t h);*/
+
+  /**
+   * Set 2D and 2D image size. For 2D images only width and height is relevatnt.
+   * @param w Image width.
+   * @param h Image height.
    */
-  void setDataSize(size_t w, size_t h);
+  void setDataSize(size_t w, size_t h, size_t d = 0);
 
   protected:
   /**

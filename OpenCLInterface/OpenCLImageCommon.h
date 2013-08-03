@@ -14,6 +14,14 @@ public:
    * @param data_output  Pointer to continious memory to store image. 
    */
   void processData(const void * data_input, void * data_output);
+
+   /**
+   * Set 3D and 2D image size. For 2D images only width and height is relevant and depth is not need to be provided.
+   * @param w Image width.
+   * @param h Image height.
+   * @param d Image depth.
+   */
+  virtual void setDataSize(size_t w, size_t h, size_t d = 0);
   
 protected:
 

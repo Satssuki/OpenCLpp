@@ -29,14 +29,6 @@ public:
    */
   ~OpenCL3DTo2DImageAlgorithm(void);
   
-  /**
-   * Set 3D and 2D image size. For 2D images only width and height is relevatnt.
-   * @param w Image width.
-   * @param h Image height.
-   * @param d Image depth.
-   */
-  void setDataSize(size_t w, size_t h, size_t d);
-  
 protected:
   /**
    * set IO args.
