@@ -100,14 +100,14 @@ __kernel void  corner_detector(__read_only image2d_t input, __write_only image2d
 	float Lxx =  l -  c + r;
 	float Lxy =  d + u - c;
 		*/
-	float Lxxx =  0.5 * (r - l);
+	/*float Lxxx =  0.5 * (r - l);
 	float Lxxy =  - ul / 8.0 + u / 4.0 - ur / 8.0
 					+ dl / 8.0 - d / 4.0 + dr / 8.0;
 	float Lxyy =  ul / 8.0 - ur / 8.0
 					- l / 4.0 + r / 4.0
 					+ dl / 8.0 - dr / 8.0;
 	float Lyyy =  0.5 * (d - u);
-	
+	*/
 	float k = fabs(Lx * Lx * Lyy + Ly * Ly * Lxx - 2.0 * Lx * Ly * Lxy);
 	write_imagef(output, (int2)(i,j), k);
 }
