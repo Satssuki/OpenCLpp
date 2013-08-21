@@ -40,6 +40,8 @@
     <Import Project="..\OpenCL.props" />
     <Import Project="..\OpenCLInterfaceTest.props" />
     <Import Project="..\..\..\PropertySheets\gtestD.props" />
+    <Import Project="..\..\..\PropertySheets\CUDA.props" />
+    <Import Project="..\..\..\PropertySheets\OpenCV.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -47,6 +49,8 @@
     <Import Project="..\OpenCLR.props" />
     <Import Project="..\OpenCL.props" />
     <Import Project="..\OpenCLInterfaceTest.props" />
+    <Import Project="..\..\..\PropertySheets\CUDA.props" />
+    <Import Project="..\..\..\PropertySheets\OpenCV.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -59,7 +63,6 @@
       <MinimalRebuild>false</MinimalRebuild>
       <EnablePREfast>false</EnablePREfast>
       <WarningLevel>Level3</WarningLevel>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
