@@ -168,3 +168,4 @@ gtest*.props
 nbproject
 
 *.cd
+DLL
