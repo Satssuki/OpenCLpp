@@ -8,6 +8,7 @@
 OpenCLCommon::OpenCLCommon(void)
 {
   prepared = false;
+  defines = "";
 }
 
 
@@ -36,11 +37,11 @@ void OpenCLCommon::createKernel()
 {
   if (!source_filename.empty())
   {
-    program = device.createAndBuildProgramFromFile(source_filename);
+    program = device.createAndBuildProgramFromFile(source_filename, defines);
   }
   else if (!source.empty())
   {
-    program = device.createAndBuildProgramFromSource(source);
+    program = device.createAndBuildProgramFromSource(source, defines);
   }
   else
   {

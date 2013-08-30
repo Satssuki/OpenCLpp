@@ -30,7 +30,7 @@ class OpenCLGaussianImage : public OpenCL2DTo2DImageAlgorithmForStream
 {
   //TODO: Check if params is set
 public:
-  OpenCLGaussianImage(void);
+  OpenCLGaussianImage(unsigned int gaussian_size);
   ~OpenCLGaussianImage(void);
 
   void setParams(const OpenCLAlgorithmParams & params);

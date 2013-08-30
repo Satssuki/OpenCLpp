@@ -127,6 +127,10 @@ protected:
    */
   cl_command_queue command_queue;
 
+  /** defines to cl kernel code
+  */
+  std::string defines;
+
 private:
   void setDevice();
 };

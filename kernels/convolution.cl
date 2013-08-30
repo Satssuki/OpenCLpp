@@ -28,17 +28,15 @@ const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_MIRRORED_REP
 
 __kernel void  convolution(__read_only image2d_t input, __write_only image2d_t output, __global float * gaussian, __private __read_only uint size) 
 {
-  int width_output = get_global_size(0); 
-  int width = get_global_size(0); 
-
   int2 pos = {get_global_id(0), get_global_id(1)};
   float sum = 0.0;
   
-  int sizeq = size;
+  //int sizeq = size;
   int gi = 0;
-  for (int i_gaussian = -sizeq; i_gaussian <= sizeq; ++i_gaussian)
+  int j_gaussian;
+  for (int i_gaussian = -SIZE; i_gaussian <= SIZE; ++i_gaussian)
   {
-	for (int j_gaussian = -sizeq; j_gaussian <= sizeq; ++j_gaussian)
+	for (j_gaussian = -SIZE; j_gaussian <= SIZE; ++j_gaussian)
 	{
 	 	sum += (read_imagef(input, sampler, pos + (int2)(i_gaussian, j_gaussian)).x * gaussian[gi++]);
 	}

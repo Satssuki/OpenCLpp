@@ -69,13 +69,13 @@ public:
    * @param source Program source in std::string.
    * @return cl_program with program.
    */
-  cl_program createAndBuildProgramFromSource(std::string source);
+  cl_program createAndBuildProgramFromSource(std::string source, std::string defines = "");
   /**
    * Create program from file.
    * @param filename Name in std::string of file with program source.
    * @return cl_program with program.
    */
-  cl_program createAndBuildProgramFromFile(std::string filename);
+  cl_program createAndBuildProgramFromFile(std::string filename, std::string defines = "");
   /**
    * Checks if device is valid and ready for use it.
    * @return true if yes, fakse otherwise.

@@ -84,7 +84,7 @@ void OpenCLGaussian::setKernelArgs(size_t di_size, size_t do_size)
 
 /******************** OpenCLGaussanImage ***********************/
 
-OpenCLGaussianImage::OpenCLGaussianImage()
+OpenCLGaussianImage::OpenCLGaussianImage(unsigned int gaussian_size)
 {
   input_image_format.image_channel_data_type = CL_FLOAT;
   input_image_format.image_channel_order = CL_LUMINANCE;
@@ -98,6 +98,8 @@ OpenCLGaussianImage::OpenCLGaussianImage()
   kernel_name = "convolution";
   source_filename = "convolution.cl";
   size = 0;
+
+  defines = "-D SIZE=" + std::to_string(gaussian_size);
 
   gaussian_memory = nullptr;
   size_memory = nullptr;

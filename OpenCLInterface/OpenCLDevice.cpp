@@ -85,17 +85,17 @@ inline cl_context OpenCLDevice::getContext()
   return this->context;
 }
 
-cl_program OpenCLDevice::createAndBuildProgramFromFile(std::string filename)
+cl_program OpenCLDevice::createAndBuildProgramFromFile(std::string filename, std::string defines)
 {
   std::ifstream file(filename.c_str());
   if ( !file.is_open() ) throw OpenCLDeviceException("Cant open file with source:" + filename);
   std::stringstream content_stream;
   content_stream << file.rdbuf();
   
-  return this->createAndBuildProgramFromSource(content_stream.str());
+  return this->createAndBuildProgramFromSource(content_stream.str(), defines);
 }
 
-cl_program OpenCLDevice::createAndBuildProgramFromSource(std::string source)
+cl_program OpenCLDevice::createAndBuildProgramFromSource(std::string source, std::string defines)
 {
   //std::cout << "FILE SOURCE:\n" << source << "\n //END OF SOURCE\n";
   cl_program program = NULL;
@@ -106,7 +106,7 @@ cl_program OpenCLDevice::createAndBuildProgramFromSource(std::string source)
   if (err != CL_SUCCESS) {
     throw OpenCLDeviceException("Cant create program", err);
   }
-  if ( (err = clBuildProgram(program, 1, &device_id, NULL, NULL,NULL)) != CL_SUCCESS) {
+  if ( (err = clBuildProgram(program, 1, &device_id, defines.c_str(), NULL,NULL)) != CL_SUCCESS) {
     //char buffer[4096];
     //size_t length;
     //clGetProgramBuildInfo(program,device_id,CL_PROGRAM_BUILD_LOG,sizeof(buffer),buffer,&length);
