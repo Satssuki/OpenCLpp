@@ -57,7 +57,7 @@ __kernel void  convolution_image(__read_only image2d_t input, __write_only image
 
   int i = get_global_id(0); //column number
   int j = get_global_id(1); //row number
-  float4 sum = 0.0;
+  float sum = 0.0;
 //  write_imagef(output, (int2)(i,j), sum);
   
   int sizeq = size;
@@ -87,7 +87,7 @@ __kernel void  laplacian(__read_only image2d_t input, __write_only image2d_t out
   {
 	for (int j_gaussian = -sizeq; j_gaussian <= sizeq; ++j_gaussian)
 	{
-	 	sum += (read_imagef(input, sampler, (int2)(i + i_gaussian, j + j_gaussian)) * read_imagef(gaussian, sampler, (int2)(i_gaussian + sizeq, j_gaussian + sizeq))).x;
+	 	sum += (read_imagef(input, sampler, (int2)(i + i_gaussian, j + j_gaussian)).x * read_imagef(gaussian, sampler, (int2)(i_gaussian + sizeq, j_gaussian + sizeq))).x;
 	}
   }
   
