@@ -6,10 +6,10 @@ __kernel void  intToFloat8bit(__read_only image2d_t input, __write_only image2d_
   const int i = get_global_id(0); //row
   const int j = get_global_id(1); //column
 
-  uint4 pixel = read_imageui(input, sampler, (int2)(i,j));
+  uint pixel = read_imageui(input, sampler, (int2)(i,j)).x;
 
-  float4 out;
-  out.s0 = pixel.s0 / 255.0;
+  float out;
+  out = pixel / 255.0;
   
   write_imagef(output, (int2)(i,j), out);
 }
@@ -20,10 +20,10 @@ __kernel void  intToFloat10bit(__read_only image2d_t input, __write_only image2d
   const int i = get_global_id(0); //row
   const int j = get_global_id(1); //column
 
-  uint4 pixel = read_imageui(input, sampler, (int2)(i,j));
+  uint pixel = read_imageui(input, sampler, (int2)(i,j)).x;
 
-  float4 out;
-  out.s0 = pixel.s0 / 1023.0;
+  float out;
+  out = pixel / 1023.0;
   
   write_imagef(output, (int2)(i,j), out);
 }
@@ -34,10 +34,10 @@ __kernel void  intToFloat12bit(__read_only image2d_t input, __write_only image2d
   const int i = get_global_id(0); //row
   const int j = get_global_id(1); //column
 
-  uint4 pixel = read_imageui(input, sampler, (int2)(i,j));
+  uint pixel = read_imageui(input, sampler, (int2)(i,j)).x;
 
-  float4 out;
-  out.s0 = pixel.s0 / 4095.0;
+  float out;
+  out = pixel / 4095.0;
   
   write_imagef(output, (int2)(i,j), out);
 }
@@ -48,10 +48,10 @@ __kernel void  intToFloat16bit(__read_only image2d_t input, __write_only image2d
   const int i = get_global_id(0); //row
   const int j = get_global_id(1); //column
 
-  uint4 pixel = read_imageui(input, sampler, (int2)(i,j));
+  uint pixel = read_imageui(input, sampler, (int2)(i,j)).x;
 
-  float4 out;
-  out.s0 = pixel.s0 / 65535.0;
+  float out;
+  out = pixel / 65535.0;
   
   write_imagef(output, (int2)(i,j), out);
 }
