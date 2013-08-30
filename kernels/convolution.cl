@@ -31,10 +31,8 @@ __kernel void  convolution(__read_only image2d_t input, __write_only image2d_t o
   int width_output = get_global_size(0); 
   int width = get_global_size(0); 
 
-  int i = get_global_id(0); //column number
-  int j = get_global_id(1); //row number
+  int2 pos = {get_global_id(0), get_global_id(1)};
   float sum = 0.0;
-//  write_imagef(output, (int2)(i,j), sum);
   
   int sizeq = size;
   int gi = 0;
@@ -42,12 +40,11 @@ __kernel void  convolution(__read_only image2d_t input, __write_only image2d_t o
   {
 	for (int j_gaussian = -sizeq; j_gaussian <= sizeq; ++j_gaussian)
 	{
-	 	sum += (read_imagef(input, sampler, (int2)(i + i_gaussian, j + j_gaussian)).x * gaussian[gi++]);
+	 	sum += (read_imagef(input, sampler, pos + (int2)(i_gaussian, j_gaussian)).x * gaussian[gi++]);
 	}
   }
   
-  write_imagef(output, (int2)(i,j), sum);
-    
+  write_imagef(output, pos, sum);  
 }
 
 __kernel void  convolution_image(__read_only image2d_t input, __write_only image2d_t output, __read_only image2d_t gaussian, __private __read_only uint size) 
