@@ -29,7 +29,8 @@ const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_MIRRORED_REP
 __kernel void  convolution(__read_only image2d_t input, __write_only image2d_t output, __global float * gaussian, __private __read_only uint size) 
 {
   int2 pos = {get_global_id(0), get_global_id(1)};
-  float sum = 0.0;
+  __local float sum;
+  sum = 0.0;
   
   //int sizeq = size;
   int gi = 0;
