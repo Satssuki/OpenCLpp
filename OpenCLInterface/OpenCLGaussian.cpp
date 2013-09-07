@@ -1,9 +1,5 @@
 #include "OpenCLGaussian.h"
 
-#ifdef DEBUG_OPENCL
-#include <iostream>
-#endif //DEBUG_OPENCL
-
 #define ASSERT_OPENCL_ERR(ERR,MSG) if(ERR != CL_SUCCESS) \
 { \
   throw OpenCLAlgorithmException(MSG, ERR); \
@@ -136,13 +132,6 @@ void OpenCLGaussianImage::setParams(const OpenCLGaussianParams& params)
   unsigned int mem_size = size * size * sizeof(float);
   gaussian = new float[size * size];
   memcpy(gaussian, params.gaussian_mask, mem_size);
-#ifdef DEBUG_OPENCL
-  for (unsigned int i = 0; i < size * size; ++i)
-  {
-    std::cout << reinterpret_cast<float*>(gaussian)[i] << " ";
-  }
-  std::cout << "\n";
-#endif //DEBUG_OPENCL
 }
 
 /*void OpenCLGaussianImage::prepareForStream(cl_command_queue cc, cl_context c)
