@@ -5,12 +5,12 @@ __kernel void findLocalMax(__read_only image2d_t input, __write_only image2d_t o
 	int i = get_global_id(0); //column number
 	int j = get_global_id(1); //row number
 	
-	float4 sum = read_imagef(input, sampler, (int2)(i, j));
+	float sum = read_imagef(input, sampler, (int2)(i, j)).x;
 	for (int ii = -1; ii < 2; ++ii)
 	{
 		for (int jj = -1; jj < 2; ++jj)
 		{
-			if ((jj != 0 || ii != 0) && read_imagef(input, sampler, (int2)(i + ii, j + jj)).x >= sum.x)
+			if (read_imagef(input, sampler, (int2)(i + ii, j + jj)).x > sum)
 			{
 				return;
 			}
@@ -18,7 +18,7 @@ __kernel void findLocalMax(__read_only image2d_t input, __write_only image2d_t o
 	}
 	
 	
-	if (sum.x > 1e-5) 
+	if (sum > 1e-5) 
 	{
 		write_imageui(output, (int2)(i, j), 255);
 	}
