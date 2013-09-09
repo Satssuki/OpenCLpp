@@ -80,9 +80,8 @@ __kernel void  corner_detector(__read_only image2d_t input, __write_only image2d
 	float Lxx =  ul / 12.0 - u / 6.0 + ur / 12.0 +
                 5.0 * l / 6.0 - 5.0 * c / 3.0 + 5.0 * r / 6.0 +
 				dl / 12.0 - d / 6.0 + dr / 12.0;//*/
-	float Lxy =  ul / 6.0 + 2.0 * u / 3.0 + ur / 6.0 +
-                2.0 * l / 3.0 - 10.0 * c / 3.0 + 2.0 * r / 3.0 +
-				dl / 6.0 + 2.0 * d / 3.0 + dr / 6.0;//*/
+	float Lxy =  ul / 4.0 - ur / 4.0 +
+				-dl / 4.0 + dr / 4.0;//*/
 	float Lyy =  ul / 12.0 + 5.0 * u / 6.0 + ur / 12.0 -
                 l / 6.0 - 5.0 * c / 3.0 - r / 6.0 +
 				dl / 12.0 +  5.0 * d / 6.0 + dr / 12.0;//*/
