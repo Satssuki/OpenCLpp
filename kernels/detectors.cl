@@ -187,6 +187,10 @@ __kernel void  ridge_detector(__read_only image2d_t input, __write_only image2d_
 		L1 = 0;
 	}
 	float L2 = (Ly * Ly - Lx * Lx) * (Lxx - Lyy) - 4 * Lx * Ly * Lxy;
+	if (fabs(L2) < 1e-5)
+	{
+		L2 = 0;
+	}
 	
 	write_imagef(out_L1, (int2)(i, j), L1);
 	write_imagef(out_L2, (int2)(i, j), L2);
