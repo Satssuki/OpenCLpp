@@ -6,10 +6,7 @@ __kernel void findLocalMax(__read_only image3d_t input, __write_only image2d_t o
 	int i = get_global_id(0); //column number
 	int j = get_global_id(1); //row number
 	int k = get_global_id(2); //depth number
-	//if (k == get_global_size(2))
-	//{
-//		return;
-//	}
+	
 	float4 sum = read_imagef(input, sampler, (int4)(i, j, k, 0));
 	for (int ii = -1; ii < 2; ++ii)
 	{
@@ -63,18 +60,6 @@ __kernel void  edge_max(__read_only image3d_t Lvv_image, __write_only image2d_t 
 	{
 		write_imageui(output, (int2)(i, j), 255);
 	}
-	
-/*	if (Lvvv.x < 0.0 && Lvv.x <= 0.1)
-	{
-		write_imagef(output, (int2)(i, j), 1.0);
-	}
-	else
-	{
-		write_imagef(output, (int2)(i, j), 0.0);
-	}//*/
-	
-	//write_imagef(output, (int2)(i, j), fabs(2.0 * Lx * Ly * Lxy));
-	
 }
 
 __kernel void  ridge_max(__read_only image3d_t L1_image, __write_only image2d_t output, __read_only image3d_t L2_image)
