@@ -35,25 +35,14 @@ __kernel void  edge_max(__read_only image3d_t Lvv_image, __write_only image2d_t 
 	int j = get_global_id(1); //row number
 	int k = get_global_id(2); //depth number
 
-	float ul = read_imagef(Lvv_image, sampler, (int4)(i - 1, j - 1, k, 0)).x;
-	float u = read_imagef(Lvv_image, sampler, (int4)(i, j - 1, k, 0)).x;
-	float ur = read_imagef(Lvv_image, sampler, (int4)(i + 1, j - 1, k, 0)).x;
-	float l = read_imagef(Lvv_image, sampler, (int4)(i - 1, j, k, 0)).x;
-	float c = read_imagef(Lvv_image, sampler, (int4)(i, j, k, 0)).x;
 	float r = read_imagef(Lvv_image, sampler, (int4)(i + 1, j, k, 0)).x;
-	float dl = read_imagef(Lvv_image, sampler, (int4)(i - 1, j + 1, k, 0)).x;
 	float d = read_imagef(Lvv_image, sampler, (int4)(i, j + 1, k, 0)).x;
 	float dr = read_imagef(Lvv_image, sampler, (int4)(i + 1, j + 1, k, 0)).x;
 	
 	float Lvvv = read_imagef(Lvvv_image, sampler, (int4)(i, j, k, 0)).x;
 	if (
 		(c * r < 0 
-		|| c * ur <0
 		|| c * dr <0
-		|| c * l <0
-		|| c * dl <0
-		|| c * ul <0
-		|| c * u <0
 		|| c * d <0)
 		&& Lvvv < 0
 		)
