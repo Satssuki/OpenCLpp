@@ -28,25 +28,15 @@ __kernel void  edge_max(__read_only image2d_t Lvv_image, __write_only image2d_t 
 	int i = get_global_id(0); //column number
 	int j = get_global_id(1); //row number
 
-	float ul = read_imagef(Lvv_image, sampler, (int2)(i - 1, j - 1)).x;
-	float u = read_imagef(Lvv_image, sampler, (int2)(i, j - 1)).x;
-	float ur = read_imagef(Lvv_image, sampler, (int2)(i + 1, j - 1)).x;
-	float l = read_imagef(Lvv_image, sampler, (int2)(i - 1, j)).x;
 	float c = read_imagef(Lvv_image, sampler, (int2)(i, j)).x;
 	float r = read_imagef(Lvv_image, sampler, (int2)(i + 1, j)).x;
-	float dl = read_imagef(Lvv_image, sampler, (int2)(i - 1, j + 1)).x;
 	float d = read_imagef(Lvv_image, sampler, (int2)(i, j + 1)).x;
 	float dr = read_imagef(Lvv_image, sampler, (int2)(i + 1, j + 1)).x;
 	
 	float Lvvv = read_imagef(Lvvv_image, sampler, (int2)(i, j)).x;
 	if (
 		(c * r < 0 
-		|| c * ur <0
 		|| c * dr <0
-		|| c * l <0
-		|| c * dl <0
-		|| c * ul <0
-		|| c * u <0
 		|| c * d <0)
 		&& Lvvv < 0
 		)
