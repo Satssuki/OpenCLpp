@@ -99,6 +99,8 @@ OpenCLGaussianImage::OpenCLGaussianImage(unsigned int gaussian_size)
 
   gaussian_memory = nullptr;
   size_memory = nullptr;
+
+  gaussian = nullptr;
 }
 
 OpenCLGaussianImage::~OpenCLGaussianImage()
@@ -127,6 +129,10 @@ void OpenCLGaussianImage::setParams(const OpenCLAlgorithmParams& params)
 
 void OpenCLGaussianImage::setParams(const OpenCLGaussianParams& params)
 {
+  if (gaussian != nullptr)
+  {
+    delete gaussian;
+  }
   size = params.mask_size;
   size_to_pass = size / 2;
   unsigned int mem_size = size * size * sizeof(float);
