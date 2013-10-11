@@ -23,7 +23,7 @@ __kernel void  gaussian_not_image( __constant float * mask, __global float* inpu
   
 }
 
-const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_MIRRORED_REPEAT | CLK_FILTER_NEAREST;
+const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;
 
 
 __kernel void  convolution(__read_only image2d_t input, __write_only image2d_t output, __global float * gaussian, __private __read_only uint size) 
