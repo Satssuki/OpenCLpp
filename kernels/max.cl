@@ -42,8 +42,8 @@ __kernel void  edge_max(__read_only image3d_t Lvv_image, __write_only image2d_t 
 	float Lvvv = read_imagef(Lvvv_image, sampler, (int4)(i, j, k, 0)).x;
 	if (
 		(c * r < 0 
-		|| c * dr <0
-		|| c * d <0)
+		|| c * dr < 0
+		|| c * d < 0)
 		&& Lvvv < 0
 		)
 	{
