@@ -18,6 +18,34 @@ OpenCLLaplacian::OpenCLLaplacian(void)
 
   kernel_name = "laplacian";
   source_filename = "convolution.cl";
+  source = 
+"const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;\n"
+"\n"
+"__kernel void  laplacian(__read_only image2d_t input, __write_only image2d_t output, __read_only\n" "image2d_t gaussian, __global __read_only uint * size, __global __read_only float * sigma) \n"
+"{\n"
+"  int width_output = get_global_size(0); \n"
+  "int width = get_global_size(0); \n"
+"\n"
+  "int i = get_global_id(0); //column number\n"
+  "int j = get_global_id(1); //row number\n"
+  "float sum = 0.0;\n"
+"  \n"
+  "int sizeq = size[0];\n"
+  "for (int i_gaussian = -sizeq; i_gaussian <= sizeq; ++i_gaussian)\n"
+  "{\n"
+"	for (int j_gaussian = -sizeq; j_gaussian <= sizeq; ++j_gaussian)\n"
+  "{\n"
+    "sum += (read_imagef(input, sampler, (int2)(i + i_gaussian, j + j_gaussian)).x *\n" "read_imagef(gaussian, sampler, (int2)(i_gaussian + sizeq, j_gaussian + sizeq))).x;\n"
+  "}\n"
+  "}\n"
+"  \n"
+  "sum = fabs(sum * sigma[0]);\n"
+"  \n"
+  "write_imagef(output, (int2)(i,j), sum);\n"
+"  \n"
+"}\n"
+"\n";
+
   size = 3;
   size_to_pass = 1;
   

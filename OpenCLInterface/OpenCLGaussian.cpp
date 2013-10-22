@@ -20,7 +20,7 @@ void OpenCLGaussian::setParams(const OpenCLAlgorithmParams & params)
 void OpenCLGaussian::prepare()
 {
   command_queue = device.getCommandQueue();
-  program = device.createAndBuildProgramFromFile("gaussian.cl"); //TODO: change path
+  program = device.createAndBuildProgramFromFile("empty.cl");  // not supported
   cl_int err;
   kernel = clCreateKernel(program, "gaussian", &err);
   ASSERT_OPENCL_ERR(err, "Cant create kernel");
@@ -93,6 +93,30 @@ OpenCLGaussianImage::OpenCLGaussianImage(unsigned int gaussian_size)
 
   kernel_name = "convolution";
   source_filename = "convolution.cl";
+  source =
+"const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;\n"
+"\n"
+"\n"
+"__kernel void  convolution(__read_only image2d_t input, __write_only image2d_t output, __global float * gaussian, __private __read_only uint size) \n"
+"{\n"
+"  int2 pos = {get_global_id(0), get_global_id(1)};\n"
+  "float sum = 0.0;\n"
+"  \n"
+  "//int sizeq = size;\n"
+  "int gi = 0;\n"
+  "int j_gaussian;\n"
+  "for (int i_gaussian = -SIZE; i_gaussian <= SIZE; ++i_gaussian)\n"
+  "{\n"
+"	for (j_gaussian = -SIZE; j_gaussian <= SIZE; ++j_gaussian)\n"
+  "{\n"
+    "sum += (read_imagef(input, sampler, pos + (int2)(i_gaussian, j_gaussian)).x * gaussian[gi++]);\n"
+  "}\n"
+  "}\n"
+"  \n"
+  "write_imagef(output, pos, sum);  \n"
+"}\n"
+"\n";
+
   size = 0;
 
   defines = "-D SIZE=" + std::to_string(gaussian_size);

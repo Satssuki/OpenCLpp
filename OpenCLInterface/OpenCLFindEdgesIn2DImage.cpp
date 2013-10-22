@@ -5,6 +5,31 @@ OpenCLFindEdgesIn2DImage::OpenCLFindEdgesIn2DImage(void)
 {
   source_filename = "max2d.cl";
   kernel_name = "edge_max";
+  source = 
+"const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP | CLK_FILTER_NEAREST;\n"
+"\n"
+"__kernel void  edge_max(__read_only image3d_t Lvv_image, __write_only image2d_t output, __read_only\n" "image3d_t Lvvv_image)\n"
+"{\n"
+"	int i = get_global_id(0); //column number\n"
+  "int j = get_global_id(1); //row number\n"
+  "int k = get_global_id(2); //depth number\n"
+"\n"
+  "float r = read_imagef(Lvv_image, sampler, (int4)(i + 1, j, k, 0)).x;\n"
+  "float d = read_imagef(Lvv_image, sampler, (int4)(i, j + 1, k, 0)).x;\n"
+  "float dr = read_imagef(Lvv_image, sampler, (int4)(i + 1, j + 1, k, 0)).x;\n"
+"	\n"
+"	float Lvvv = read_imagef(Lvvv_image, sampler, (int4)(i, j, k, 0)).x;\n"
+  "if (\n"
+    "(c * r < 0 \n"
+    "|| c * dr < 0\n"
+    "|| c * d < 0)\n"
+    "&& Lvvv < 0\n"
+    ")\n"
+  "{\n"
+"		write_imageui(output, (int2)(i, j), 255);\n"
+  "}\n"
+"}\n"
+"\n";
 
   input_image_format.image_channel_data_type = CL_FLOAT;
   input_image_format.image_channel_order = CL_LUMINANCE;
