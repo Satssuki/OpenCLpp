@@ -15,7 +15,7 @@ OpenCLRidgeDetector::OpenCLRidgeDetector(void)
   output_image_format.image_channel_order = CL_LUMINANCE;
 
   kernel_name = "ridge_detector";
-  source_filename = "detectors.cl";
+  //source_filename = "detectors.cl";
 
   source = 
 "const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;\n"

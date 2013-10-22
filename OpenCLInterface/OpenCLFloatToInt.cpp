@@ -44,7 +44,7 @@ OpenCLFloatToInt::OpenCLFloatToInt(OpenCLFloatToIntMode mode)
   //input = output = NULL;
   input_image_format.image_channel_data_type = CL_FLOAT;
 
-  source_filename = "conversions.cl";
+  //source_filename = "conversions.cl";
   source = 
 "__kernel void  floatToUInt8ThreeChannels(__read_only image2d_t input, __write_only image2d_t output) \n"
 "{\n"

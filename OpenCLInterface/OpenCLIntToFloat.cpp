@@ -56,10 +56,9 @@ OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
   output_image_format.image_channel_data_type= CL_FLOAT;
 
   //source
-  source_filename = "conversions.cl";
-  source = "";
-  /*
-  source = "const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_NONE | CLK_FILTER_NEAREST;\n"
+//  source_filename = "conversions.cl";
+  source =
+"const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_NONE | CLK_FILTER_NEAREST;\n"
 "\n"
 "__kernel void  intToFloat8bit(__read_only image2d_t input, __write_only image2d_t output) \n"
 "{\n"
@@ -67,9 +66,9 @@ OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
   "const int i = get_global_id(0); //row\n"
   "const int j = get_global_id(1); //column\n"
 "\n"
-"float4 pixel = convert_float4(read_imageui(input, sampler, (int2)(i,j)));\n"
+  "uint pixel = read_imageui(input, sampler, (int2)(i,j)).x;\n"
 "\n"
-  "float4 out;\n"
+  "float out;\n"
   "out = pixel / 255.0;\n"
 "  \n"
   "write_imagef(output, (int2)(i,j), out);\n"
@@ -81,9 +80,9 @@ OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
   "const int i = get_global_id(0); //row\n"
   "const int j = get_global_id(1); //column\n"
 "\n"
-  "uint4 pixel = read_imageui(input, sampler, (int2)(i,j));\n"
+  "uint pixel = read_imageui(input, sampler, (int2)(i,j)).x;\n"
 "\n"
-  "float4 out;\n"
+  "float out;\n"
   "out = pixel / 1023.0;\n"
 "  \n"
   "write_imagef(output, (int2)(i,j), out);\n"
@@ -95,9 +94,9 @@ OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
   "const int i = get_global_id(0); //row\n"
   "const int j = get_global_id(1); //column\n"
 "\n"
-  "uint4 pixel = read_imageui(input, sampler, (int2)(i,j));\n"
+  "uint pixel = read_imageui(input, sampler, (int2)(i,j)).x;\n"
 "\n"
-  "float4 out;\n"
+  "float out;\n"
   "out = pixel / 4095.0;\n"
 "  \n"
   "write_imagef(output, (int2)(i,j), out);\n"
@@ -109,13 +108,14 @@ OpenCLIntToFloat::OpenCLIntToFloat(OpenCLIntToFloatMode mode)
   "const int i = get_global_id(0); //row\n"
   "const int j = get_global_id(1); //column\n"
 "\n"
-  "uint4 pixel = read_imageui(input, sampler, (int2)(i,j));\n"
+  "uint pixel = read_imageui(input, sampler, (int2)(i,j)).x;\n"
 "\n"
-  "float4 out;\n"
+  "float out;\n"
   "out = pixel / 65535.0;\n"
 "  \n"
   "write_imagef(output, (int2)(i,j), out);\n"
-"}\n";*/
+"}\n"
+"\n";
 }
 
 

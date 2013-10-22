@@ -3,24 +3,24 @@
 
 OpenCLFindRidgesIn2DImage::OpenCLFindRidgesIn2DImage(void)
 {
-  source_filename = "max2d.cl";
+  //source_filename = "max2d.cl";
   kernel_name = "ridge_max";
   source =
 "const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP | CLK_FILTER_NEAREST;\n"
 "\n"
-"__kernel void  ridge_max(__read_only image3d_t L1_image, __write_only image2d_t output, __read_only\n" "image3d_t L2_image)\n"
+"__kernel void  ridge_max(__read_only image2d_t L1_image, __write_only image2d_t output, __read_only image2d_t L2_image)\n"
 "{\n"
 "	int i = get_global_id(0); //column number\n"
   "int j = get_global_id(1); //row number\n"
-  "int k = get_global_id(2); //depth number\n"
 "	\n"
-"	float L1 = read_imagef(L1_image, sampler, (int4)(i, j, k, 0)).x;\n"
-  "float L2 = read_imagef(L2_image, sampler, (int4)(i, j, k, 0)).x;\n"
+"	float L1 = read_imagef(L1_image, sampler, (int2)(i, j)).x;\n"
+  "float L2 = read_imagef(L2_image, sampler, (int2)(i, j)).x;\n"
   "if (L1 == 0 && L2 > 0)\n"
   "{\n"
 "		write_imageui(output, (int2)(i, j), 255);\n"
   "}\n"
-"}\n";
+"}\n"
+"\n";
 
   input_image_format.image_channel_data_type = CL_FLOAT;
   input_image_format.image_channel_order = CL_LUMINANCE;

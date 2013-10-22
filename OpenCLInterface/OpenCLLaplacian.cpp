@@ -17,7 +17,7 @@ OpenCLLaplacian::OpenCLLaplacian(void)
   laplacian_format.image_channel_order = CL_LUMINANCE;  
 
   kernel_name = "laplacian";
-  source_filename = "convolution.cl";
+  //source_filename = "convolution.cl";
   source = 
 "const sampler_t sampler = CLK_NORMALIZED_COORDS_FALSE | CLK_ADDRESS_CLAMP_TO_EDGE | CLK_FILTER_NEAREST;\n"
 "\n"
