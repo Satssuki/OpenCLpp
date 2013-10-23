@@ -19,6 +19,10 @@ OpenCLFindRidgesIn2DImage::OpenCLFindRidgesIn2DImage(void)
   "{\n"
 "		write_imageui(output, (int2)(i, j), 255);\n"
   "}\n"
+"	else\n"
+"	{\n"
+"		write_imageui(output, (int2)(i, j), 0);\n"
+"	}\n"
 "}\n"
 "\n";
 
@@ -43,6 +47,7 @@ void OpenCLFindRidgesIn2DImage::setOtherArguments()
     throw OpenCL2DTo2DImageException("Error while create image 2D for L2 in edge find max", err);
   }
 
+#if 0
   //set zeros for output image
   char *zero_memory = new char[height * width];
   memset(zero_memory, 0, height * width);
@@ -53,7 +58,9 @@ void OpenCLFindRidgesIn2DImage::setOtherArguments()
   if (err)
   {
     throw OpenCL2DTo2DImageException("Error while enqueue write zero image", err);
-  }
+  }  
+#endif // 0
+
   
   err = setKernelArg(2, &L2_memory);
   if (err)

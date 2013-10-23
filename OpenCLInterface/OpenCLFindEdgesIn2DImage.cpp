@@ -28,6 +28,10 @@ OpenCLFindEdgesIn2DImage::OpenCLFindEdgesIn2DImage(void)
   "{\n"
 "		write_imageui(output, (int2)(i, j), 255);\n"
   "}\n"
+"	else\n"
+"	{\n"
+"		write_imageui(output, (int2)(i, j), 0);\n"
+"	}\n"
 "}\n"
 "\n";
 
@@ -51,6 +55,7 @@ void OpenCLFindEdgesIn2DImage::setOtherArguments()
   {
     throw OpenCL2DTo2DImageException("Error while create image 2D for Lvvv in edge find max", err);
   }
+#if 0
 
   //set zeros for output image
   char *zero_memory = new char[height * width];
@@ -62,7 +67,9 @@ void OpenCLFindEdgesIn2DImage::setOtherArguments()
   if (err)
   {
     throw OpenCL2DTo2DImageException("Error while enqueue write zero image", err);
-  }
+  }  
+#endif // 0
+
   
   err = setKernelArg(2, &Lvvv_memory);
   if (err)

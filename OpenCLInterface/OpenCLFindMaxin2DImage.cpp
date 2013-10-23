@@ -29,6 +29,10 @@ OpenCLFindMaxin2DImage::OpenCLFindMaxin2DImage(void)
   "{\n"
 "		write_imageui(output, (int2)(i, j), 255);\n"
   "}\n"
+"	else\n"
+"	{\n"
+"		write_imageui(output, (int2)(i, j), 0);\n"
+"	}\n"
 "}\n"
 "\n";
 
@@ -46,6 +50,7 @@ OpenCLFindMaxin2DImage::~OpenCLFindMaxin2DImage(void)
 
 void OpenCLFindMaxin2DImage::setOtherArguments()
 {
+#if 0
   //set zeros for output image
   char *zero_memory = new char[height * width];
   memset(zero_memory, 0, height * width);
@@ -56,5 +61,7 @@ void OpenCLFindMaxin2DImage::setOtherArguments()
   if (err)
   {
     throw OpenCL2DTo2DImageException("Error while enqueue write zero image", err);
-  }
+  }  
+#endif // 0
+
 }
